@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="../image/website-icon/Favicon-300x300.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us — Wah Tat Plant</title>
+    <title>History &amp; Milestones — Wah Tat Plant</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,6 +88,7 @@
             display: block; padding: 12px 20px; font-size: 14px; color: var(--color-text); transition: var(--transition);
         }
         .nav__dropdown a:hover { background: rgba(86, 54, 209, 0.05); color: var(--color-purple); padding-left: 24px; }
+        .nav__dropdown a.active { background: rgba(86, 54, 209, 0.05); color: var(--color-purple); font-weight: 600; }
 
         .header__actions { display: flex; align-items: center; gap: 12px; }
         .header__lang {
@@ -117,16 +118,88 @@
         .section__header { text-align: center; margin-bottom: 60px; }
         .section__label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-purple); margin-bottom: 16px; }
         .section__title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; line-height: 1.2; letter-spacing: -0.5px; }
-        .section__subtitle { font-size: 16px; color: var(--color-text-light); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .section__subtitle { font-size: 16px; color: var(--color-text-light); margin-top: 16px; max-width: 680px; margin-left: auto; margin-right: auto; }
 
         /* Page Banner */
         .page-banner {
             position: relative; height: 400px; display: flex; align-items: center; overflow: hidden;
-            background: linear-gradient(135deg, rgba(50,55,60,0.9) 0%, rgba(86,54,209,0.75) 100%);
+            background: linear-gradient(135deg, rgba(26, 29, 32, 0.88) 0%, rgba(86, 54, 209, 0.72) 100%),
+                        url('../image/site-images/ucp/floral-photo-2.jpg') center / cover no-repeat;
+        }
+        .page-banner::after {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 120%, rgba(226, 73, 138, 0.35), transparent 60%);
+            pointer-events: none;
         }
         .page-banner__content { position: relative; z-index: 1; color: #fff; text-align: center; width: 100%; }
         .page-banner__breadcrumb { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 16px; }
         .page-banner__title { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -0.5px; }
+
+        /* Key Years */
+        .key-years { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 64px; }
+        .key-years__item { text-align: center; padding: 8px 52px; border-right: 1px solid var(--color-border); }
+        .key-years__item:last-child { border-right: none; }
+        .key-years__num {
+            font-family: var(--font-serif); font-size: clamp(34px, 4vw, 48px); font-weight: 600; line-height: 1.1;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-magenta));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent; color: transparent;
+        }
+        .key-years__label { font-size: 13px; color: var(--color-text-light); margin-top: 8px; letter-spacing: 0.3px; }
+
+        /* Timeline */
+        .timeline { position: relative; max-width: 1080px; margin: 0 auto; padding-top: 20px; }
+        .timeline::before {
+            content: ''; position: absolute; top: 0; bottom: 0; left: 50%;
+            width: 2px; transform: translateX(-50%);
+            background: linear-gradient(180deg, var(--color-purple), var(--color-magenta));
+            border-radius: 2px;
+        }
+        .timeline__item {
+            position: relative; width: 50%; padding: 0 64px 72px;
+            opacity: 0; transform: translateY(30px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .timeline__item.visible { opacity: 1; transform: none; }
+        .timeline__item:nth-child(odd) { left: 0; }
+        .timeline__item:nth-child(even) { left: 50%; }
+
+        .timeline__dot {
+            position: absolute; top: 4px; width: 44px; height: 44px; border-radius: 50%;
+            background: linear-gradient(#fff, #fff) padding-box,
+                        linear-gradient(135deg, var(--color-purple), var(--color-magenta)) border-box;
+            border: 3px solid transparent;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 18px rgba(86, 54, 209, 0.25);
+            z-index: 1;
+        }
+        .timeline__dot::after {
+            content: ''; width: 12px; height: 12px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-magenta));
+        }
+        .timeline__item:nth-child(odd) .timeline__dot { right: -22px; }
+        .timeline__item:nth-child(even) .timeline__dot { left: -22px; }
+
+        .timeline__card {
+            background: #fff; border-radius: 16px; padding: 40px;
+            box-shadow: 0 12px 40px rgba(26, 29, 32, 0.07);
+            border: 1px solid rgba(229, 231, 235, 0.6);
+            transition: var(--transition);
+        }
+        .timeline__card:hover { box-shadow: 0 20px 60px rgba(26, 29, 32, 0.12); transform: translateY(-4px); }
+        .timeline__period {
+            display: inline-block; padding: 7px 18px; border-radius: 50px;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-magenta));
+            color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .timeline__title { font-family: var(--font-serif); font-size: clamp(22px, 2.5vw, 28px); font-weight: 600; margin: 18px 0 12px; line-height: 1.25; }
+        .timeline__text { font-size: 15px; color: var(--color-text-light); line-height: 1.9; }
+        .timeline__chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+        .timeline__chip {
+            font-size: 12px; padding: 7px 14px; border-radius: 50px;
+            background: var(--color-cream); border: 1px solid var(--color-border); color: var(--color-dark);
+        }
+        .timeline__chip strong { color: var(--color-purple); font-weight: 700; }
 
         /* CTA Banner */
         .cta-banner {
@@ -188,6 +261,7 @@
             .nav__list { gap: 0; }
             .nav__link { padding: 10px 12px; font-size: 13px; }
             .footer__grid { grid-template-columns: 1fr 1fr; }
+            .timeline__item { padding: 0 44px 60px; }
         }
         @media (max-width: 768px) {
             :root { --header-height: 64px; }
@@ -212,6 +286,15 @@
             .footer__grid { grid-template-columns: 1fr; gap: 30px; }
             .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
             .page-banner { height: 280px; }
+            .key-years__item { padding: 10px 28px; border-right: none; width: 50%; }
+            .key-years__item:nth-child(even) { border-left: 1px solid var(--color-border); }
+            .key-years { margin-top: 44px; }
+            .timeline::before { left: 22px; transform: none; }
+            .timeline__item, .timeline__item:nth-child(odd), .timeline__item:nth-child(even) {
+                width: 100%; left: 0; padding: 0 0 48px 60px;
+            }
+            .timeline__item:nth-child(odd) .timeline__dot, .timeline__item:nth-child(even) .timeline__dot { left: 0; right: auto; }
+            .timeline__card { padding: 28px 24px; }
         }
     </style>
 </head>
@@ -240,7 +323,7 @@
                     <a href="./" class="nav__link active" data-en="About Us" data-zh="关于我们">About Us <i class="fas fa-chevron-down"></i></a>
                     <div class="nav__dropdown">
                         <a href="./" data-en="About Us" data-zh="关于我们">About Us</a>
-                        <a href="history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a>
+                        <a href="history.html" class="active" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a>
                     </div>
                 </li>
             </ul>
@@ -266,18 +349,109 @@
 <section class="page-banner">
     <div class="container page-banner__content">
         <p class="page-banner__breadcrumb" data-en="About Us" data-zh="关于我们">About Us</p>
-        <h1 class="page-banner__title" data-en="About Wah Tat Plant" data-zh="关于 Wah Tat Plant">About Wah Tat Plant</h1>
+        <h1 class="page-banner__title" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</h1>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
         <div class="section__header">
-            <p class="section__label" data-en="Our Story" data-zh="我们的故事">Our Story</p>
-            <h2 class="section__title" data-en="Over 46 Years of Craftsmanship" data-zh="超过46年的匠心工艺">Over 46 Years of Craftsmanship</h2>
-            <p class="section__subtitle" data-en="This page is currently under construction. Please check back soon to learn more about Wah Tat Plant's history, values, and the people behind our success." data-zh="此页面正在建设中。请稍后回来了解更多关于 Wah Tat Plant 的历史、价值观和成功背后的人们。">
-                This page is currently under construction. Please check back soon to learn more about Wah Tat Plant's history, values, and the people behind our success.
+            <p class="section__label" data-en="Our Journey" data-zh="发展历程">Our Journey</p>
+            <h2 class="section__title" data-en="From a Single Factory to a Diversified Group" data-zh="从一间厂房到多元发展的集团">From a Single Factory to a Diversified Group</h2>
+            <p class="section__subtitle" data-en="Since our founding in Hong Kong in 1980, Wah Tat has grown from a single factory producing artificial plants into a diversified group spanning industrial trading, real estate and finance across Greater China — a journey built on craftsmanship, foresight and an enduring spirit of innovation." data-zh="自1980年于香港创立以来，华达从一间生产人造植物的厂房，发展成为横跨工业贸易、房地产与金融业务的多元化集团，业务遍及两岸三地。这是一段以匠心、远见与创新精神书写的旅程。">
+                Since our founding in Hong Kong in 1980, Wah Tat has grown from a single factory producing artificial plants into a diversified group spanning industrial trading, real estate and finance across Greater China — a journey built on craftsmanship, foresight and an enduring spirit of innovation.
             </p>
+        </div>
+        <div class="key-years">
+            <div class="key-years__item">
+                <div class="key-years__num">1980</div>
+                <p class="key-years__label" data-en="Founding in Hong Kong" data-zh="香港始创">Founding in Hong Kong</p>
+            </div>
+            <div class="key-years__item">
+                <div class="key-years__num">1984</div>
+                <p class="key-years__label" data-en="Mainland Expansion" data-zh="进军大陆">Mainland Expansion</p>
+            </div>
+            <div class="key-years__item">
+                <div class="key-years__num">2006</div>
+                <p class="key-years__label" data-en="Wah Kei Real Estate" data-zh="华基地产成立">Wah Kei Real Estate</p>
+            </div>
+            <div class="key-years__item">
+                <div class="key-years__num">2013</div>
+                <p class="key-years__label" data-en="Group Formation" data-zh="集团正式成立">Group Formation</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--cream">
+    <div class="container">
+        <div class="section__header">
+            <p class="section__label" data-en="Our Timeline" data-zh="发展时间轴">Our Timeline</p>
+            <h2 class="section__title" data-en="Four Eras, One Vision" data-zh="四个时代，同一愿景">Four Eras, One Vision</h2>
+        </div>
+        <div class="timeline">
+
+            <div class="timeline__item" style="transition-delay: 0s;">
+                <div class="timeline__dot"></div>
+                <div class="timeline__card">
+                    <span class="timeline__period">1980</span>
+                    <h3 class="timeline__title" data-en="The Founding in Hong Kong" data-zh="始创香江">The Founding in Hong Kong</h3>
+                    <p class="timeline__text" data-en="In 1980, the three founding Mok brothers established a factory in Hong Kong, launching an industrial trading business centred on artificial plants. By actively introducing advanced production technology, they laid the foundation of Wah Tat Industrial." data-zh="始创人莫氏三兄弟于香港设厂，开展以生产人造植物为主的工业贸易事业，并积极引入高端生产技术，标誌着华达实业初步成立。">
+                        In 1980, the three founding Mok brothers established a factory in Hong Kong, launching an industrial trading business centred on artificial plants. By actively introducing advanced production technology, they laid the foundation of Wah Tat Industrial.
+                    </p>
+                    <div class="timeline__chips">
+                        <span class="timeline__chip"><strong>1980</strong> <span data-en="Factory founded in Hong Kong" data-zh="香港设厂">Factory founded in Hong Kong</span></span>
+                        <span class="timeline__chip"><span data-en="The Mok Brothers" data-zh="莫氏三兄弟">The Mok Brothers</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline__item" style="transition-delay: 0.12s;">
+                <div class="timeline__dot"></div>
+                <div class="timeline__card">
+                    <span class="timeline__period">1984 – 2000</span>
+                    <h3 class="timeline__title" data-en="Entering Mainland China, Expanding Markets" data-zh="进军大陆，拓展市场">Entering Mainland China, Expanding Markets</h3>
+                    <p class="timeline__text" data-en="Seizing the opportunities of China's reform and opening-up, the Mok brothers became early pioneers in the mainland market. A new factory was established in Jiangmen, Guangdong Province, where the company developed premium products that earned widespread acclaim." data-zh="莫氏三兄弟看准中国改革开放的契机，率先进军大陆市场，并在广东省江门市设立新厂，研发优质产品，赢得业绩好评。">
+                        Seizing the opportunities of China's reform and opening-up, the Mok brothers became early pioneers in the mainland market. A new factory was established in Jiangmen, Guangdong Province, where the company developed premium products that earned widespread acclaim.
+                    </p>
+                    <div class="timeline__chips">
+                        <span class="timeline__chip"><strong>1984</strong> <span data-en="New factory in Jiangmen" data-zh="江门设立新厂">New factory in Jiangmen</span></span>
+                        <span class="timeline__chip"><span data-en="Premium product development" data-zh="研发优质产品">Premium product development</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline__item" style="transition-delay: 0.24s;">
+                <div class="timeline__dot"></div>
+                <div class="timeline__card">
+                    <span class="timeline__period">2000 – 2009</span>
+                    <h3 class="timeline__title" data-en="New Frontiers, New Talent" data-zh="进军新领域，引入新血">New Frontiers, New Talent</h3>
+                    <p class="timeline__text" data-en="To embrace the opportunities and challenges of the new century, the company invested heavily in the real estate market and expanded into diversified businesses. Premium properties were acquired across Hong Kong, Shenzhen, Jiangmen and Guangzhou, while the purchase and revitalisation of industrial buildings and shops generated steady rental income. In 2006, Wah Kei Real Estate was established, marking the company's entry into property development." data-zh="为迎接新世纪的机遇与挑战，公司决定重点投资房地产市场，拓展多元业务，积极在香港、深圳、江门及广州等地投资优质物业，亦通过购置并活化工厂大厦及商铺的方式，赢得稳健的租金收入。另外，在2006年成立了华基地产，进军房地产开发行业。">
+                        To embrace the opportunities and challenges of the new century, the company invested heavily in the real estate market and expanded into diversified businesses. Premium properties were acquired across Hong Kong, Shenzhen, Jiangmen and Guangzhou, while the purchase and revitalisation of industrial buildings and shops generated steady rental income. In 2006, Wah Kei Real Estate was established, marking the company's entry into property development.
+                    </p>
+                    <div class="timeline__chips">
+                        <span class="timeline__chip"><strong>2000</strong> <span data-en="Real estate investment" data-zh="投资房地产市场">Real estate investment</span></span>
+                        <span class="timeline__chip"><strong>2006</strong> <span data-en="Wah Kei Real Estate founded" data-zh="华基地产成立">Wah Kei Real Estate founded</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline__item" style="transition-delay: 0.36s;">
+                <div class="timeline__dot"></div>
+                <div class="timeline__card">
+                    <span class="timeline__period" data-en="2009 – Present" data-zh="2009至今">2009 – Present</span>
+                    <h3 class="timeline__title" data-en="Diversification &amp; Group Formation" data-zh="多元发展，公司集团化">Diversification &amp; Group Formation</h3>
+                    <p class="timeline__text" data-en="From 2009 onward, the company invested in diverse businesses across Greater China and began its evolution into a group. In 2009, Wah Tat entered the financial sector, establishing and investing in Heshan Guomin Microcredit Co., Ltd. In 2013, the group launched Prosperity International Finance, an overseas financial arm that further expanded its financing platform. That same year, Wah Tat Group was formally established, reorganising its real estate development, commercial management, property investment, financial investment and industrial trading businesses under one unified structure." data-zh="自2009年起，公司积极投资两岸三地不同的业务，开始集团化发展。2009年，华达集团开始涉足金融业务，成立及投资鹤山市国民小额贷款有限公司，标誌着正式进军金融行业。2013年，华达集团开设海外金融公司 - 盛世国际融资，更进一步扩大了原有的金融融资平台。同年，华达集团正式成立，并重组旗下房地产开发、商业管理、地产投资、金融投资、工业贸易等相关业务范畴。">
+                        From 2009 onward, the company invested in diverse businesses across Greater China and began its evolution into a group. In 2009, Wah Tat entered the financial sector, establishing and investing in Heshan Guomin Microcredit Co., Ltd. In 2013, the group launched Prosperity International Finance, an overseas financial arm that further expanded its financing platform. That same year, Wah Tat Group was formally established, reorganising its real estate development, commercial management, property investment, financial investment and industrial trading businesses under one unified structure.
+                    </p>
+                    <div class="timeline__chips">
+                        <span class="timeline__chip"><strong>2009</strong> <span data-en="Entered the financial sector" data-zh="涉足金融业务">Entered the financial sector</span></span>
+                        <span class="timeline__chip"><strong>2013</strong> <span data-en="Prosperity International Finance" data-zh="盛世国际融资">Prosperity International Finance</span></span>
+                        <span class="timeline__chip"><strong>2013</strong> <span data-en="Wah Tat Group established" data-zh="华达集团正式成立">Wah Tat Group established</span></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
@@ -306,7 +480,6 @@
                     <li><a href="history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a></li>
                     <li><a href="../products/" data-en="Products &amp; Services" data-zh="产品与服务">Products &amp; Services</a></li>
                     <li><a href="../sustainability/" data-en="Sustainability" data-zh="可持续发展">Sustainability</a></li>
-                    <li><a href="#" data-en="Careers" data-zh="加入我们">Careers</a></li>
                     <li><a href="../contact/" data-en="Contact Us" data-zh="联系我们">Contact Us</a></li>
                 </ul>
             </div>
@@ -394,6 +567,18 @@
     sClose.addEventListener('click', function() { sOver.classList.remove('active'); });
     sOver.addEventListener('click', function(e) { if (e.target === sOver) sOver.classList.remove('active'); });
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape') sOver.classList.remove('active'); });
+
+    // Timeline scroll reveal
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+            entries.forEach(function(en) {
+                if (en.isIntersecting) { en.target.classList.add('visible'); io.unobserve(en.target); }
+            });
+        }, { threshold: 0.15 });
+        document.querySelectorAll('.timeline__item').forEach(function(el) { io.observe(el); });
+    } else {
+        document.querySelectorAll('.timeline__item').forEach(function(el) { el.classList.add('visible'); });
+    }
 })();
 </script>
 </body>

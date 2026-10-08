@@ -80,6 +80,7 @@
         .nav__item:hover .nav__link i { transform: rotate(180deg); }
         .nav__dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--color-white); min-width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); overflow: hidden; border: 1px solid var(--color-border); }
         .nav__item:hover .nav__dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .nav__item:last-child .nav__dropdown { left: auto; right: 0; }
         .nav__dropdown a { display: block; padding: 12px 20px; font-size: 14px; color: var(--color-text); transition: var(--transition); }
         .nav__dropdown a:hover { background: rgba(86, 54, 209, 0.05); color: var(--color-purple); padding-left: 24px; }
 
@@ -219,7 +220,13 @@
                         </div>
                     </li>
                     <li class="nav__item"><a href="../contact/" class="nav__link" data-en="Contact Us" data-zh="联系我们">Contact Us</a></li>
-                    <li class="nav__item"><a href="../about/" class="nav__link" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                    <li class="nav__item">
+                        <a href="../about/" class="nav__link" data-en="About Us" data-zh="关于我们">About Us <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav__dropdown">
+                            <a href="../about/" data-en="About Us" data-zh="关于我们">About Us</a>
+                            <a href="../about/history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a>
+                        </div>
+                    </li>
                 </ul>
             </nav>
             <div class="header__actions">
@@ -316,7 +323,8 @@
                 <div>
                     <h4 data-en="Quick Links" data-zh="快速链接">Quick Links</h4>
                     <ul class="footer__links">
-                        <li><a href="#" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                        <li><a href="../about/" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                        <li><a href="../about/history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a></li>
                         <li><a href="./" data-en="Products &amp; Services" data-zh="产品与服务">Products &amp; Services</a></li>
                         <li><a href="../sustainability/" data-en="Sustainability" data-zh="可持续发展">Sustainability</a></li>
                         <li><a href="#" data-en="Careers" data-zh="加入我们">Careers</a></li>
