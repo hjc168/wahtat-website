@@ -33,10 +33,10 @@ git commit -m "feat: UCP Group 风格网站 — 初版"
 
 ```bash
 # 创建 GitHub 仓库并推送
-gh repo create ucp-website --public --source=. --remote=origin --push
+gh repo create wahtat-website --public --source=. --remote=origin --push
 
 # 启用 GitHub Pages
-gh api repos/hjc168/ucp-website/pages -X POST \
+gh api repos/hjc168/wahtat-website/pages -X POST \
   -f "source[branch]=master" \
   -f "source[path]=/"
 ```
