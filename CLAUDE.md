@@ -1,8 +1,8 @@
-# CLAUDE.md — UCP Group 风格网站项目文档
+# CLAUDE.md — Wah Tat（华达）集团网站项目文档
 
 > 项目路径：`d:\Debugging website`
-> 仓库地址：https://github.com/hjc168/ucp-website
-> 在线地址：https://hjc168.github.io/ucp-website/
+> 仓库地址：https://github.com/hjc168/wahtat-website
+> 在线地址：https://hjc168.github.io/wahtat-website/
 > 创建日期：2026-07-16
 
 ---
