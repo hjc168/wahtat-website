@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiries — Wah Tat Plant Admin</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="admin-layout">
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar__brand">
+        <i class="fas fa-leaf" style="color:var(--admin-accent);font-size:20px;"></i>
+        <span style="color:#fff;font-weight:700;margin-left:8px;">Wah Tat Admin</span>
+    </div>
+    <nav class="sidebar__nav">
+        <a href="dashboard.html"><i class="fas fa-th-large"></i> <span data-en="Dashboard" data-zh="仪表盘">Dashboard</span></a>
+
+        <div class="sidebar__section" data-en="Modules" data-zh="模块">Modules</div>
+        <a href="module-home.html"><i class="fas fa-home"></i> <span data-en="Home" data-zh="首页">Home</span></a>
+        <a href="module-products.html"><i class="fas fa-box"></i> <span data-en="Products" data-zh="产品">Products</span></a>
+        <a href="module-sustainability.html"><i class="fas fa-leaf"></i> <span data-en="Sustainability" data-zh="可持续发展">Sustainability</span></a>
+        <a href="module-contact.html"><i class="fas fa-envelope"></i> <span data-en="Contact Us" data-zh="联系我们">Contact Us</span></a>
+        <a href="module-about.html"><i class="fas fa-info-circle"></i> <span data-en="About Us" data-zh="关于我们">About Us</span></a>
+
+        <div class="sidebar__section" data-en="Media" data-zh="媒体">Media</div>
+        <a href="images.html"><i class="fas fa-images"></i> <span data-en="Image Library" data-zh="图片库">Image Library</span></a>
+
+        <div class="sidebar__section" data-en="Leads" data-zh="询盘">Leads</div>
+        <a href="inquiries.html" class="active"><i class="fas fa-inbox"></i> <span data-en="Inquiries" data-zh="询盘管理">Inquiries</span></a>
+    </nav>
+    <div class="sidebar__footer">
+        <a href="#" onclick="logout();return false" style="color:rgba(255,255,255,0.5);">
+            <i class="fas fa-sign-out-alt"></i> <span data-en="Logout" data-zh="退出登录">Logout</span>
+        </a>
+    </div>
+</aside>
+
+<!-- Main -->
+<main class="main-content">
+    <div class="topbar">
+        <h2 data-en="Inquiries" data-zh="询盘管理">Inquiries</h2>
+        <div class="topbar__user">
+            <button class="lang-toggle" onclick="toggleLang()" title="Switch to Chinese">
+                <i class="fas fa-globe"></i> EN
+            </button>
+            <span data-en="Logged in as" data-zh="已登录">Logged in as</span> <strong id="usernameDisplay">...</strong>
+        </div>
+    </div>
+
+    <!-- Supabase 未配置提示 -->
+    <div class="inq-config-warning" id="configWarning" style="display:none;">
+        <h4 data-en="⚠ Inquiries backend not configured yet" data-zh="⚠ 询盘后台尚未配置">⚠ Inquiries backend not configured yet</h4>
+        <div data-en-html="Follow these steps:<br>1. Create a free project at <b>supabase.com</b><br>2. SQL Editor → run the SQL in <code>admin/setup/inquiries.sql</code><br>3. Project Settings → API → copy <b>Project URL</b> and <b>service_role</b> key<br>4. Save them into <code>admin/data/supabase-config.json</code> (see <code>supabase-config.example.json</code>)<br>5. Fill the same URL + <b>anon public</b> key in <code>contact/index.html</code><br>6. Restart the admin server" data-zh-html="请按以下步骤配置：<br>1. 在 <b>supabase.com</b> 免费创建项目<br>2. SQL Editor → 运行 <code>admin/setup/inquiries.sql</code> 里的建表语句<br>3. Project Settings → API → 复制 <b>Project URL</b> 与 <b>service_role</b> 密钥<br>4. 填入 <code>admin/data/supabase-config.json</code>（参考 <code>supabase-config.example.json</code>）<br>5. 把同样的 URL 与 <b>anon public</b> 密钥填入 <code>contact/index.html</code><br>6. 重启后台服务器">
+        </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card"><div class="stat-card__number" id="statTotal">...</div><div class="stat-card__label" data-en="Total Inquiries" data-zh="询盘总数">Total Inquiries</div></div>
+        <div class="stat-card"><div class="stat-card__number" id="statUnread">...</div><div class="stat-card__label" data-en="Unread" data-zh="未读">Unread</div></div>
+    </div>
+
+    <!-- List -->
+    <div class="card">
+        <div class="card__header">
+            <h3><i class="fas fa-inbox"></i> <span data-en="Visitor Inquiries" data-zh="访客询盘">Visitor Inquiries</span></h3>
+            <div style="display:flex;gap:8px;">
+                <button class="btn btn-outline btn-sm" id="exportBtn"><i class="fas fa-download"></i> <span data-en="Export CSV" data-zh="导出 CSV">Export CSV</span></button>
+                <button class="btn btn-outline btn-sm" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
+            </div>
+        </div>
+
+        <div class="inq-filter" id="filterBar">
+            <button class="active" data-filter="all"><span data-en="All" data-zh="全部">All</span> (<span id="countAll">0</span>)</button>
+            <button data-filter="unread"><span data-en="Unread" data-zh="未读">Unread</span> (<span id="countUnread">0</span>)</button>
+            <button data-filter="read"><span data-en="Read" data-zh="已读">Read</span> (<span id="countRead">0</span>)</button>
+        </div>
+
+        <div id="tableWrap" style="overflow-x:auto;">
+            <table class="inq-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th data-en="Date" data-zh="日期">Date</th>
+                        <th data-en="Name" data-zh="姓名">Name</th>
+                        <th data-en="Email" data-zh="邮箱">Email</th>
+                        <th data-en="Subject" data-zh="主题">Subject</th>
+                        <th data-en="Message" data-zh="内容">Message</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="inqBody">
+                    <tr><td colspan="7" class="inq-empty"><i class="fas fa-spinner fa-spin"></i></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- Detail Modal -->
+<div class="modal-overlay" id="detailOverlay">
+    <div class="modal" style="max-width:560px;">
+        <h3><i class="fas fa-envelope-open-text"></i> <span data-en="Inquiry Detail" data-zh="询盘详情">Inquiry Detail</span></h3>
+        <dl class="inq-detail">
+            <dt data-en="Date" data-zh="日期">Date</dt><dd id="dDate"></dd>
+            <dt data-en="Name" data-zh="姓名">Name</dt><dd id="dName"></dd>
+            <dt data-en="Email" data-zh="邮箱">Email</dt><dd id="dEmail"></dd>
+            <dt data-en="Subject" data-zh="主题">Subject</dt><dd id="dSubject"></dd>
+            <dd class="inq-detail__message" id="dMessage"></dd>
+        </dl>
+        <div class="modal__actions">
+            <button class="btn btn-outline btn-sm" id="dDelete"><i class="fas fa-trash"></i> <span data-en="Delete" data-zh="删除">Delete</span></button>
+            <button class="btn btn-outline btn-sm" id="dToggleRead"><i class="fas fa-check-double"></i> <span data-en="Mark Read" data-zh="标为已读">Mark Read</span></button>
+            <a class="btn btn-primary btn-sm" id="dReply" href="#" target="_blank" rel="noopener"><i class="fas fa-reply"></i> <span data-en="Reply by Email" data-zh="邮件回复">Reply by Email</span></a>
+            <button class="btn btn-outline btn-sm" id="dClose"><span data-en="Close" data-zh="关闭">Close</span></button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/admin.js"></script>
+<script>
+let allRows = [];
+let currentFilter = 'all';
+let currentRow = null;
+
+function escapeHtml(s) {
+    return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function render() {
+    const filtered = allRows.filter(r => {
+        if (currentFilter === 'unread') return !r.read;
+        if (currentFilter === 'read') return r.read;
+        return true;
+    });
+    document.getElementById('countAll').textContent = allRows.length;
+    document.getElementById('countUnread').textContent = allRows.filter(r => !r.read).length;
+    document.getElementById('countRead').textContent = allRows.filter(r => r.read).length;
+    document.getElementById('statTotal').textContent = allRows.length;
+    document.getElementById('statUnread').textContent = allRows.filter(r => !r.read).length;
+
+    const tbody = document.getElementById('inqBody');
+    if (!filtered.length) {
+        const zh = currentLang === 'zh';
+        tbody.innerHTML = '<tr><td colspan="7" class="inq-empty"><i class="fas fa-inbox"></i>' +
+            (zh ? '暂无询盘记录' : 'No inquiries yet') + '</td></tr>';
+        return;
+    }
+    tbody.innerHTML = filtered.map(r => `
+        <tr class="${r.read ? '' : 'inq-row--unread'}" data-id="${escapeHtml(r.id)}">
+            <td><span class="inq-dot ${r.read ? 'inq-dot--read' : 'inq-dot--unread'}" title="${r.read ? 'Read' : 'Unread'}"></span></td>
+            <td style="white-space:nowrap;">${escapeHtml(formatDate(r.created_at))}</td>
+            <td class="inq-cell-name">${escapeHtml(r.name)}</td>
+            <td class="inq-cell-email">${escapeHtml(r.email)}</td>
+            <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(r.subject || '—')}</td>
+            <td class="inq-cell-message">${escapeHtml(r.message || '')}</td>
+            <td class="inq-cell-actions">
+                <button class="inq-icon-btn" title="View" onclick="event.stopPropagation();openDetail('${escapeHtml(r.id)}')"><i class="fas fa-eye"></i></button>
+                <button class="inq-icon-btn" title="${r.read ? 'Mark unread' : 'Mark read'}" onclick="event.stopPropagation();toggleRead('${escapeHtml(r.id)}')"><i class="fas ${r.read ? 'fa-envelope' : 'fa-envelope-open-text'}"></i></button>
+                <button class="inq-icon-btn inq-icon-btn--danger" title="Delete" onclick="event.stopPropagation();deleteInq('${escapeHtml(r.id)}')"><i class="fas fa-trash"></i></button>
+            </td>
+        </tr>`).join('');
+    tbody.querySelectorAll('tr[data-id]').forEach(tr => {
+        tr.addEventListener('click', () => openDetail(tr.dataset.id));
+    });
+}
+
+async function loadInquiries() {
+    try {
+        const res = await apiGet('/api/inquiries');
+        if (!res) return;
+        if (res.error) {
+            document.getElementById('configWarning').style.display = 'block';
+            document.getElementById('inqBody').innerHTML =
+                '<tr><td colspan="7" class="inq-empty"><i class="fas fa-tools"></i>' +
+                (currentLang === 'zh' ? '询盘后端未配置（见上方说明）' : 'Inquiries backend not configured (see above)') + '</td></tr>';
+            return;
+        }
+        document.getElementById('configWarning').style.display = 'none';
+        allRows = Array.isArray(res) ? res : [];
+        render();
+    } catch (e) {
+        console.error(e);
+        document.getElementById('inqBody').innerHTML =
+            '<tr><td colspan="7" class="inq-empty"><i class="fas fa-exclamation-triangle"></i>' +
+            (currentLang === 'zh' ? '加载失败' : 'Failed to load') + '</td></tr>';
+    }
+}
+
+function openDetail(id) {
+    const r = allRows.find(x => x.id === id);
+    if (!r) return;
+    currentRow = r;
+    document.getElementById('dDate').textContent = formatDate(r.created_at);
+    document.getElementById('dName').textContent = r.name;
+    document.getElementById('dEmail').textContent = r.email;
+    document.getElementById('dSubject').textContent = r.subject || '—';
+    document.getElementById('dMessage').textContent = r.message || '';
+    const t = document.getElementById('dToggleRead');
+    t.innerHTML = r.read
+        ? '<i class="fas fa-envelope"></i> <span data-en="Mark Unread" data-zh="标为未读">Mark Unread</span>'
+        : '<i class="fas fa-check-double"></i> <span data-en="Mark Read" data-zh="标为已读">Mark Read</span>';
+    document.getElementById('dReply').href = 'mailto:' + encodeURIComponent(r.email) +
+        '?subject=' + encodeURIComponent('Re: ' + (r.subject || 'Your inquiry to Wah Tat Plant'));
+    document.getElementById('detailOverlay').classList.add('active');
+}
+
+function closeDetail() {
+    document.getElementById('detailOverlay').classList.remove('active');
+    currentRow = null;
+}
+
+async function toggleRead(id) {
+    const r = allRows.find(x => x.id === id);
+    if (!r) return;
+    const res = await apiPatch('/api/inquiries/' + encodeURIComponent(id), { read: !r.read });
+    if (res && res.success) { await loadInquiries(); }
+    else showToast('Failed to update', 'error');
+}
+
+async function deleteInq(id) {
+    if (!confirm(currentLang === 'zh' ? '确定删除这条询盘？' : 'Delete this inquiry?')) return;
+    const res = await apiDelete('/api/inquiries/' + encodeURIComponent(id));
+    if (res && res.success) { closeDetail(); await loadInquiries(); showToast(currentLang === 'zh' ? '已删除' : 'Deleted'); }
+    else showToast('Failed to delete', 'error');
+}
+
+function exportCsv() {
+    const rows = allRows.filter(r => {
+        if (currentFilter === 'unread') return !r.read;
+        if (currentFilter === 'read') return r.read;
+        return true;
+    });
+    if (!rows.length) { showToast(currentLang === 'zh' ? '没有可导出的数据' : 'Nothing to export', 'error'); return; }
+    const csvRows = [['Date', 'Name', 'Email', 'Subject', 'Message', 'Status']];
+    rows.forEach(r => csvRows.push([
+        new Date(r.created_at).toLocaleString(), r.name, r.email, r.subject || '',
+        (r.message || '').replace(/\r?\n/g, ' '), r.read ? 'Read' : 'Unread'
+    ]));
+    const csv = '﻿' + csvRows.map(cols => cols.map(c => '"' + String(c).replace(/"/g, '""') + '"').join(',')).join('\r\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    const d = new Date();
+    a.download = 'inquiries-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.csv';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    showToast(currentLang === 'zh' ? 'CSV 已导出' : 'CSV exported');
+}
+
+(async () => {
+    if (!await checkAuth()) return;
+    await loadInquiries();
+
+    document.querySelectorAll('#filterBar button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('#filterBar button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentFilter = btn.dataset.filter;
+            render();
+        });
+    });
+    document.getElementById('exportBtn').addEventListener('click', exportCsv);
+    document.getElementById('refreshBtn').addEventListener('click', async () => { await loadInquiries(); showToast(currentLang === 'zh' ? '已刷新' : 'Refreshed'); });
+    document.getElementById('dClose').addEventListener('click', closeDetail);
+    document.getElementById('dToggleRead').addEventListener('click', () => { if (currentRow) toggleRead(currentRow.id); });
+    document.getElementById('dDelete').addEventListener('click', () => { if (currentRow) deleteInq(currentRow.id); });
+    document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
+})();
+function toggleLang() { applyLang(currentLang === 'en' ? 'zh' : 'en'); }
+</script>
+
+</body>
+</html>

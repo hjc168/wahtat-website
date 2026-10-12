@@ -1,0 +1,4 @@
+{
+  "supabaseUrl": "https://YOUR-PROJECT.supabase.co",
+  "serviceKey": "YOUR-SERVICE-ROLE-KEY"
+}

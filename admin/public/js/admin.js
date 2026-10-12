@@ -54,6 +54,16 @@ async function apiPut(url, body) {
     return res.json();
 }
 
+async function apiPatch(url, body) {
+    const res = await fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    if (res.status === 401) { window.location.href = '/admin/'; return null; }
+    return res.json();
+}
+
 async function apiDelete(url) {
     const res = await fetch(url, { method: 'DELETE' });
     if (res.status === 401) { window.location.href = '/admin/'; return null; }

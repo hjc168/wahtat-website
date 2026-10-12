@@ -553,14 +553,106 @@ app.get('/api/page-images', requireAuth, (req, res) => {
 //  DASHBOARD STATS
 // ══════════════════════════════════════════════════════════
 
-app.get('/api/stats', requireAuth, (req, res) => {
+app.get('/api/stats', requireAuth, async (req, res) => {
     const images = JSON.parse(fs.readFileSync(IMAGES_FILE, 'utf-8'));
+
+    // 询盘统计（Supabase 未配置时返回 null，前端隐藏对应卡片）
+    let inquiries = null;
+    try {
+        const rows = await supabaseRest('GET', 'inquiries?select=id,read');
+        inquiries = {
+            total: rows.length,
+            unread: rows.filter(r => !r.read).length
+        };
+    } catch (e) {
+        inquiries = null;
+    }
 
     res.json({
         totalImages: images.length,
         recentUploads: images.slice(-5).reverse(),
-        modules: Object.keys(CONTENT_REGISTRY)
+        modules: Object.keys(CONTENT_REGISTRY),
+        inquiries
     });
+});
+
+// ══════════════════════════════════════════════════════════
+//  INQUIRIES API (询盘管理 — 数据存于 Supabase)
+// ══════════════════════════════════════════════════════════
+
+const SUPABASE_CONFIG_FILE = path.join(DATA_DIR, 'supabase-config.json');
+
+function getSupabaseConfig() {
+    if (!fs.existsSync(SUPABASE_CONFIG_FILE)) return null;
+    try {
+        const cfg = JSON.parse(fs.readFileSync(SUPABASE_CONFIG_FILE, 'utf-8'));
+        if (!cfg.supabaseUrl || !cfg.serviceKey || cfg.serviceKey.startsWith('YOUR-')) return null;
+        return cfg;
+    } catch (e) {
+        return null;
+    }
+}
+
+async function supabaseRest(method, pathName, body) {
+    const cfg = getSupabaseConfig();
+    if (!cfg) {
+        const err = new Error('Supabase not configured. Create admin/data/supabase-config.json (see supabase-config.example.json).');
+        err.status = 503;
+        throw err;
+    }
+    const headers = {
+        'apikey': cfg.serviceKey,
+        'Authorization': 'Bearer ' + cfg.serviceKey,
+        'Content-Type': 'application/json'
+    };
+    if (method === 'GET') headers['Accept'] = 'application/json';
+    else headers['Prefer'] = 'return=representation';
+
+    const res = await fetch(cfg.supabaseUrl + '/rest/v1/' + pathName, {
+        method,
+        headers,
+        body: body ? JSON.stringify(body) : undefined
+    });
+    if (!res.ok) {
+        const err = new Error('Supabase request failed (HTTP ' + res.status + ')');
+        err.status = 502;
+        throw err;
+    }
+    const text = await res.text();
+    return text ? JSON.parse(text) : null;
+}
+
+// GET /api/inquiries?unread=1 — 询盘列表（最新在前）
+app.get('/api/inquiries', requireAuth, async (req, res) => {
+    try {
+        let q = 'inquiries?select=*&order=created_at.desc&limit=500';
+        if (req.query.unread === '1') q += '&read=eq.false';
+        const rows = await supabaseRest('GET', q);
+        res.json(rows || []);
+    } catch (e) {
+        res.status(e.status || 500).json({ error: e.message });
+    }
+});
+
+// PATCH /api/inquiries/:id — 标记已读/未读 { read: true|false }
+app.patch('/api/inquiries/:id', requireAuth, async (req, res) => {
+    try {
+        const read = !!req.body.read;
+        const rows = await supabaseRest('PATCH', 'inquiries?id=eq.' + encodeURIComponent(req.params.id), { read });
+        res.json({ success: true, row: rows && rows[0] });
+    } catch (e) {
+        res.status(e.status || 500).json({ error: e.message });
+    }
+});
+
+// DELETE /api/inquiries/:id — 删除询盘
+app.delete('/api/inquiries/:id', requireAuth, async (req, res) => {
+    try {
+        await supabaseRest('DELETE', 'inquiries?id=eq.' + encodeURIComponent(req.params.id));
+        res.json({ success: true });
+    } catch (e) {
+        res.status(e.status || 500).json({ error: e.message });
+    }
 });
 
 // ══════════════════════════════════════════════════════════

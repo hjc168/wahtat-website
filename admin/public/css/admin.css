@@ -516,3 +516,61 @@ ul { list-style: none; }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .image-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* ── Inquiries (询盘管理) ──────────────────────────── */
+.inq-filter { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.inq-filter button {
+  padding: 8px 18px; border-radius: 50px; border: 1px solid var(--admin-border);
+  background: #fff; color: var(--admin-text); font-size: 13px; cursor: pointer;
+  transition: all 0.2s ease;
+}
+.inq-filter button:hover { border-color: var(--admin-primary); color: var(--admin-primary); }
+.inq-filter button.active { background: var(--admin-primary); border-color: var(--admin-primary); color: #fff; }
+
+.inq-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.inq-table th {
+  text-align: left; padding: 10px 12px; color: var(--admin-text-light); font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--admin-border);
+  white-space: nowrap;
+}
+.inq-table td { padding: 12px; border-bottom: 1px solid var(--admin-border); vertical-align: middle; }
+.inq-table tbody tr { cursor: pointer; transition: background 0.15s ease; }
+.inq-table tbody tr:hover { background: rgba(86, 54, 209, 0.04); }
+.inq-table tbody tr.inq-row--unread td { font-weight: 600; }
+
+.inq-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; }
+.inq-dot--unread { background: var(--admin-accent); box-shadow: 0 0 0 3px rgba(226, 73, 138, 0.15); }
+.inq-dot--read { background: #d1d5db; }
+
+.inq-cell-name { font-weight: 600; }
+.inq-cell-email { color: var(--admin-text-light); }
+.inq-cell-message {
+  max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  color: var(--admin-text-light); font-weight: 400;
+}
+.inq-cell-actions { display: flex; gap: 6px; justify-content: flex-end; }
+.inq-icon-btn {
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--admin-border);
+  background: #fff; color: var(--admin-text-light); cursor: pointer; font-size: 12.5px;
+  transition: all 0.2s ease;
+}
+.inq-icon-btn:hover { border-color: var(--admin-primary); color: var(--admin-primary); }
+.inq-icon-btn.inq-icon-btn--danger:hover { border-color: #c62828; color: #c62828; }
+
+.inq-empty { text-align: center; padding: 40px 0; color: var(--admin-text-light); font-size: 14px; }
+.inq-empty i { font-size: 32px; display: block; margin-bottom: 12px; opacity: 0.4; }
+
+.inq-config-warning {
+  background: #fff8e1; border: 1px solid #ffe082; border-radius: 12px;
+  padding: 24px; margin-bottom: 20px; font-size: 14px; line-height: 1.8; color: #6d4c00;
+}
+.inq-config-warning h4 { margin-bottom: 8px; font-size: 15px; }
+.inq-config-warning code { background: #fff; padding: 2px 8px; border-radius: 4px; font-size: 12.5px; }
+
+.inq-detail { display: grid; grid-template-columns: 120px 1fr; gap: 8px 16px; font-size: 14px; margin-bottom: 16px; }
+.inq-detail dt { color: var(--admin-text-light); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; padding-top: 4px; }
+.inq-detail dd { line-height: 1.7; word-break: break-word; }
+.inq-detail dd.inq-detail__message {
+  white-space: pre-wrap; background: #f7f5f0; padding: 14px 16px; border-radius: 8px;
+  grid-column: 1 / -1;
+}

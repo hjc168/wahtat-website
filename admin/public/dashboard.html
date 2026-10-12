@@ -27,6 +27,9 @@
 
         <div class="sidebar__section" data-en="Media" data-zh="媒体">Media</div>
         <a href="images.html"><i class="fas fa-images"></i> <span data-en="Image Library" data-zh="图片库">Image Library</span></a>
+
+        <div class="sidebar__section" data-en="Leads" data-zh="询盘">Leads</div>
+        <a href="inquiries.html"><i class="fas fa-inbox"></i> <span data-en="Inquiries" data-zh="询盘管理">Inquiries</span></a>
     </nav>
     <div class="sidebar__footer">
         <a href="#" onclick="logout();return false" style="color:rgba(255,255,255,0.5);">
@@ -76,6 +79,10 @@
                 <div class="quick-link__icon"><i class="fas fa-info-circle"></i></div>
                 <div class="quick-link__text" data-en="About Us" data-zh="关于我们">About Us</div>
             </a>
+            <a href="inquiries.html" class="quick-link">
+                <div class="quick-link__icon"><i class="fas fa-inbox"></i></div>
+                <div class="quick-link__text" data-en="Inquiries" data-zh="询盘管理">Inquiries</div>
+            </a>
         </div>
     </div>
 
@@ -99,6 +106,15 @@
     // Load stats
     try {
         const stats = await apiGet('/api/stats');
+        const inqCards = stats.inquiries ? `
+            <div class="stat-card">
+                <div class="stat-card__number">${stats.inquiries.total}</div>
+                <div class="stat-card__label">Inquiries 询盘</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card__number">${stats.inquiries.unread}</div>
+                <div class="stat-card__label">Unread 未读</div>
+            </div>` : '';
         document.getElementById('statsGrid').innerHTML = `
             <div class="stat-card">
                 <div class="stat-card__number">${stats.totalImages}</div>
@@ -108,6 +124,7 @@
                 <div class="stat-card__number">${stats.modules.length}</div>
                 <div class="stat-card__label">Modules</div>
             </div>
+            ${inqCards}
         `;
 
         // Recent uploads

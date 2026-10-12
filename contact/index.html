@@ -1137,6 +1137,37 @@
             background: #4528b0;
             box-shadow: 0 8px 25px rgba(86, 54, 209, 0.3);
         }
+        .contact-form__submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .contact-form__hp {
+            position: absolute !important;
+            left: -9999px !important;
+            width: 1px !important;
+            height: 1px !important;
+            opacity: 0 !important;
+        }
+        .contact-form__status {
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 4px 0 14px;
+            padding: 10px 14px;
+            border-radius: 8px;
+        }
+        .contact-form__status--success {
+            display: block;
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+        .contact-form__status--error {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ffcdd2;
+        }
         /* ===== CONTACT INFO ===== */
         .contact-info-card {
             background: var(--color-cream);
@@ -1254,24 +1285,26 @@
             <div class="contact-layout">
                 <!-- Form -->
                 <div>
-                    <form class="contact-form" onsubmit="alert('Thank you for your message. We will get back to you soon.\\n\\n谢谢您的留言，我们会尽快回复。'); return false;">
+                    <form class="contact-form" id="contactForm" novalidate>
+                        <input type="text" name="company" class="contact-form__hp" tabindex="-1" autocomplete="off" aria-hidden="true">
                         <div class="contact-form__group">
                             <label class="contact-form__label" data-en="Name" data-zh="姓名">Name <span class="required">*</span></label>
-                            <input type="text" class="contact-form__input" required data-en-placeholder="Your name" data-zh-placeholder="您的姓名" placeholder="Your name">
+                            <input type="text" class="contact-form__input" name="name" required data-en-placeholder="Your name" data-zh-placeholder="您的姓名" placeholder="Your name">
                         </div>
                         <div class="contact-form__group">
                             <label class="contact-form__label" data-en="Email" data-zh="电子邮件">Email <span class="required">*</span></label>
-                            <input type="email" class="contact-form__input" required data-en-placeholder="your@email.com" data-zh-placeholder="您的邮箱" placeholder="your@email.com">
+                            <input type="email" class="contact-form__input" name="email" required data-en-placeholder="your@email.com" data-zh-placeholder="您的邮箱" placeholder="your@email.com">
                         </div>
                         <div class="contact-form__group">
                             <label class="contact-form__label" data-en="Subject" data-zh="主题">Subject</label>
-                            <input type="text" class="contact-form__input" data-en-placeholder="How can we help?" data-zh-placeholder="我们能帮什么？" placeholder="How can we help?">
+                            <input type="text" class="contact-form__input" name="subject" data-en-placeholder="How can we help?" data-zh-placeholder="我们能帮什么？" placeholder="How can we help?">
                         </div>
                         <div class="contact-form__group">
                             <label class="contact-form__label" data-en="Message" data-zh="信息">Message</label>
-                            <textarea class="contact-form__textarea" data-en-placeholder="Tell us about your inquiry..." data-zh-placeholder="请描述您的查询..." placeholder="Tell us about your inquiry..."></textarea>
+                            <textarea class="contact-form__textarea" name="message" data-en-placeholder="Tell us about your inquiry..." data-zh-placeholder="请描述您的查询..." placeholder="Tell us about your inquiry..."></textarea>
                         </div>
-                        <button type="submit" class="contact-form__submit" data-en="Submit" data-zh="提交">Submit</button>
+                        <p class="contact-form__status" id="contactFormStatus" role="status"></p>
+                        <button type="submit" class="contact-form__submit" id="contactFormBtn" data-en="Submit" data-zh="提交">Submit</button>
                     </form>
                 </div>
 
@@ -1556,6 +1589,77 @@
             observer.observe(el);
         });
 
+    </script>
+    <!-- ===== INQUIRY FORM SUBMISSION (Supabase) ===== -->
+    <script>
+    // ═══ 询盘提交配置 — 请替换为你的 Supabase 项目信息 ═══
+    // Supabase 控制台 → Project Settings → API
+    var SUPABASE_URL = 'https://YOUR-PROJECT.supabase.co';
+    var SUPABASE_ANON_KEY = 'YOUR-ANON-KEY';
+    // ═══════════════════════════════════════════════════
+
+    (function () {
+        var form = document.getElementById('contactForm');
+        if (!form) return;
+        var openedAt = Date.now();
+        var statusEl = document.getElementById('contactFormStatus');
+        var btn = document.getElementById('contactFormBtn');
+        var zh = localStorage.getItem('ucp-lang') === 'zh';
+
+        function setStatus(type, en, zhText) {
+            statusEl.className = 'contact-form__status contact-form__status--' + type;
+            statusEl.setAttribute('data-en', en);
+            statusEl.setAttribute('data-zh', zhText);
+            statusEl.textContent = (localStorage.getItem('ucp-lang') === 'zh') ? zhText : en;
+        }
+        function restoreBtn() {
+            btn.disabled = false;
+            btn.textContent = (localStorage.getItem('ucp-lang') === 'zh') ? '提交' : 'Submit';
+        }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var hp = form.querySelector('input[name="company"]');
+            if (hp && hp.value) return; // honeypot 命中：机器人，静默丢弃
+
+            var name = form.querySelector('input[name="name"]').value.trim();
+            var email = form.querySelector('input[name="email"]').value.trim();
+            var subject = form.querySelector('input[name="subject"]').value.trim();
+            var message = form.querySelector('textarea[name="message"]').value.trim();
+
+            if (!name || !email) {
+                setStatus('error', 'Please fill in your name and email.', '请填写姓名和邮箱。');
+                return;
+            }
+            if (Date.now() - openedAt < 3000) {
+                setStatus('error', 'Please wait a moment and try again.', '提交过快，请稍候再试。');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = zh ? '提交中...' : 'Sending...';
+
+            fetch(SUPABASE_URL + '/rest/v1/inquiries', {
+                method: 'POST',
+                headers: {
+                    'apikey': SUPABASE_ANON_KEY,
+                    'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+                    'Content-Type': 'application/json',
+                    'Prefer': 'return=minimal'
+                },
+                body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
+            }).then(function (res) {
+                if (res.ok) {
+                    setStatus('success', 'Thank you! Your message has been sent. We will get back to you soon.', '谢谢！您的信息已提交，我们会尽快回复。');
+                    form.reset();
+                } else {
+                    setStatus('error', 'Submission failed. Please try again or email us directly.', '提交失败，请重试或直接发邮件给我们。');
+                }
+            }).catch(function () {
+                setStatus('error', 'Submission failed. Please try again or email us directly.', '提交失败，请重试或直接发邮件给我们。');
+            }).finally(restoreBtn);
+        });
+    })();
     </script>
 </body>
 </html>
