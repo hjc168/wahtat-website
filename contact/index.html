@@ -1639,15 +1639,14 @@
             btn.disabled = true;
             btn.textContent = zh ? '提交中...' : 'Sending...';
 
-            fetch(SUPABASE_URL + '/rest/v1/inquiries', {
+            fetch(SUPABASE_URL + '/rest/v1/rpc/submit_inquiry', {
                 method: 'POST',
                 headers: {
                     'apikey': SUPABASE_ANON_KEY,
                     'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-                    'Content-Type': 'application/json',
-                    'Prefer': 'return=minimal'
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ name: name, email: email, subject: subject, message: message })
+                body: JSON.stringify({ p_name: name, p_email: email, p_subject: subject, p_message: message })
             }).then(function (res) {
                 if (res.ok) {
                     setStatus('success', 'Thank you! Your message has been sent. We will get back to you soon.', '谢谢！您的信息已提交，我们会尽快回复。');

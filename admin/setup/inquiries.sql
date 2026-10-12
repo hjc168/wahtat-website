@@ -15,25 +15,28 @@ create table if not exists public.inquiries (
   created_at timestamptz not null default now()
 );
 
--- 启用行级安全 (RLS)
+-- 启用行级安全 (RLS)：访客无法直接读写表
 alter table public.inquiries enable row level security;
 
--- 清除该表上所有旧策略（保证幂等）
-do $$
-declare pol record;
-begin
-  for pol in
-    select policyname from pg_policies
-    where schemaname = 'public' and tablename = 'inquiries'
-  loop
-    execute format('drop policy if exists %I on public.inquiries', pol.policyname);
-  end loop;
-end $$;
+-- ── 提交询盘函数（SECURITY DEFINER 绕过 RLS，只开放给匿名访客调用）──
+create or replace function public.submit_inquiry(
+  p_name text,
+  p_email text,
+  p_subject text,
+  p_message text
+)
+returns void
+language sql
+security definer
+set search_path = public
+as $$
+  insert into public.inquiries (name, email, subject, message)
+  values (p_name, p_email, p_subject, p_message);
+$$;
 
--- 匿名访客（网站前端）只允许 INSERT（提交询盘），不允许读取/修改/删除
-create policy "anon can insert inquiries"
-  on public.inquiries
-  for insert to anon
-  with check (true);
+-- 仅匿名访客可调用（网站前端），防止其他角色滥用
+grant execute on function public.submit_inquiry(text, text, text, text) to anon;
+revoke execute on function public.submit_inquiry(text, text, text, text) from public;
+revoke execute on function public.submit_inquiry(text, text, text, text) from authenticated;
 
--- 后台通过 service_role 密钥访问，自动绕过 RLS，无需额外策略
+-- 后台通过 service_role 密钥直接读写表，自动绕过 RLS，无需额外策略
