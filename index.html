@@ -359,6 +359,29 @@
             height: 100%;
             object-fit: cover;
         }
+        .hero__play {
+            position: absolute;
+            bottom: 88px;
+            right: 40px;
+            z-index: 5;
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, var(--color-purple), var(--color-magenta));
+            color: #fff;
+            font-size: 20px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            animation: heroPlayPulse 2s ease-in-out infinite;
+        }
+        @keyframes heroPlayPulse {
+            0%, 100% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(226, 73, 138, 0.5); }
+            50% { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 0 14px rgba(226, 73, 138, 0); }
+        }
         .hero__overlay {
             position: absolute;
             inset: 0;
@@ -1058,6 +1081,7 @@
             .footer__grid { grid-template-columns: 1fr; gap: 30px; }
             .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
             .hero { height: 70vh; min-height: 450px; }
+            .hero__play { right: 20px; bottom: 76px; width: 54px; height: 54px; font-size: 17px; }
             .hero__quote { font-size: 18px; }
         }
 
@@ -1138,6 +1162,7 @@
         <video class="hero__video" autoplay="" loop="" muted="" playsinline="" webkit-playsinline="" x5-playsinline="" x5-video-player-type="h5" preload="auto" poster="image/site-images/ucp/floral-photo-2.jpg">
             <source src="image/home-material/home-video/banner-video.mp4" type="video/mp4">
         </video>
+        <button class="hero__play" id="heroPlay" aria-label="Play video"><i class="fas fa-play"></i></button>
         <div class="hero__overlay"></div>
         <div class="hero__content">
             <p class="hero__quote" data-en="&quot;Bringing more than 46 years of family values and experiences in the artificial botanical industry, we focus on craftsmanship, innovation, and premium quality artificial floral and home decoration products. Our commitment is to our customers, our communities, and our planet.&quot;" data-zh="&quot;我们拥有超过46年的家族价值观和人造植物行业经验，专注于工艺、创新和优质人造花卉及家居装饰产品。我们致力于服务我们的用户、社区和地球。&quot;">"Bringing more than 46 years of family values and experiences in the artificial botanical industry, we focus on craftsmanship, innovation, and premium quality artificial floral and home decoration products. Our commitment is to our customers, our communities, and our planet."</p>
@@ -1537,6 +1562,22 @@
                 window.removeEventListener('touchstart', retryOnTouch);
             };
             window.addEventListener('touchstart', retryOnTouch, { passive: true });
+
+            // 兜底：加载几秒后仍未播放（自动播放被拦截 / 网络慢）→ 显示点击播放按钮
+            const heroPlay = document.getElementById('heroPlay');
+            if (heroPlay) {
+                const showFallback = () => {
+                    if (heroVideo.paused || heroVideo.currentTime < 0.5) {
+                        heroPlay.style.display = 'flex';
+                    }
+                };
+                setTimeout(showFallback, 4000);
+                heroPlay.addEventListener('click', () => {
+                    heroVideo.muted = true;
+                    heroVideo.play().catch(() => {});
+                });
+                heroVideo.addEventListener('playing', () => { heroPlay.style.display = 'none'; });
+            }
         }
 
         // --- Mobile menu toggle ---
