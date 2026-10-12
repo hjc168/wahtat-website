@@ -574,3 +574,8 @@ ul { list-style: none; }
   white-space: pre-wrap; background: #f7f5f0; padding: 14px 16px; border-radius: 8px;
   grid-column: 1 / -1;
 }
+.inq-table input[type="checkbox"] {
+  accent-color: var(--admin-primary);
+  width: 15px; height: 15px; cursor: pointer;
+  vertical-align: middle;
+}

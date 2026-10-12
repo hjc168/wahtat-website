@@ -67,7 +67,8 @@
     <div class="card">
         <div class="card__header">
             <h3><i class="fas fa-inbox"></i> <span data-en="Visitor Inquiries" data-zh="访客询盘">Visitor Inquiries</span></h3>
-            <div style="display:flex;gap:8px;">
+            <div style="display:flex;gap:8px;align-items:center;">
+                <span id="selCount" style="font-size:12px;color:var(--admin-text-light);display:none;"></span>
                 <button class="btn btn-outline btn-sm" id="exportBtn"><i class="fas fa-download"></i> <span data-en="Export CSV" data-zh="导出 CSV">Export CSV</span></button>
                 <button class="btn btn-outline btn-sm" id="refreshBtn"><i class="fas fa-sync-alt"></i></button>
             </div>
@@ -83,6 +84,7 @@
             <table class="inq-table">
                 <thead>
                     <tr>
+                        <th style="width:36px;"><input type="checkbox" id="checkAll" title="Select all"></th>
                         <th></th>
                         <th data-en="Date" data-zh="日期">Date</th>
                         <th data-en="Name" data-zh="姓名">Name</th>
@@ -93,7 +95,7 @@
                     </tr>
                 </thead>
                 <tbody id="inqBody">
-                    <tr><td colspan="7" class="inq-empty"><i class="fas fa-spinner fa-spin"></i></td></tr>
+                    <tr><td colspan="8" class="inq-empty"><i class="fas fa-spinner fa-spin"></i></td></tr>
                 </tbody>
             </table>
         </div>
@@ -127,6 +129,7 @@
 let allRows = [];
 let currentFilter = 'all';
 let currentRow = null;
+const selectedIds = new Set();
 
 function escapeHtml(s) {
     return String(s == null ? '' : s)
@@ -134,12 +137,39 @@ function escapeHtml(s) {
         .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
 
-function render() {
-    const filtered = allRows.filter(r => {
+function getFilteredRows() {
+    return allRows.filter(r => {
         if (currentFilter === 'unread') return !r.read;
         if (currentFilter === 'read') return r.read;
         return true;
     });
+}
+
+function updateCheckAll() {
+    const checkAll = document.getElementById('checkAll');
+    const visible = getFilteredRows();
+    if (!visible.length) {
+        checkAll.checked = false;
+        checkAll.indeterminate = false;
+        return;
+    }
+    const selCount = visible.filter(r => selectedIds.has(r.id)).length;
+    checkAll.checked = selCount === visible.length;
+    checkAll.indeterminate = selCount > 0 && selCount < visible.length;
+}
+
+function updateSelCount() {
+    const el = document.getElementById('selCount');
+    if (selectedIds.size) {
+        el.style.display = 'inline';
+        el.textContent = (currentLang === 'zh' ? '已选 ' : 'Selected: ') + selectedIds.size;
+    } else {
+        el.style.display = 'none';
+    }
+}
+
+function render() {
+    const filtered = getFilteredRows();
     document.getElementById('countAll').textContent = allRows.length;
     document.getElementById('countUnread').textContent = allRows.filter(r => !r.read).length;
     document.getElementById('countRead').textContent = allRows.filter(r => r.read).length;
@@ -149,27 +179,39 @@ function render() {
     const tbody = document.getElementById('inqBody');
     if (!filtered.length) {
         const zh = currentLang === 'zh';
-        tbody.innerHTML = '<tr><td colspan="7" class="inq-empty"><i class="fas fa-inbox"></i>' +
+        tbody.innerHTML = '<tr><td colspan="8" class="inq-empty"><i class="fas fa-inbox"></i>' +
             (zh ? '暂无询盘记录' : 'No inquiries yet') + '</td></tr>';
-        return;
+    } else {
+        tbody.innerHTML = filtered.map(r => `
+            <tr class="${r.read ? '' : 'inq-row--unread'}" data-id="${escapeHtml(r.id)}">
+                <td><input type="checkbox" class="row-check" data-id="${escapeHtml(r.id)}" ${selectedIds.has(r.id) ? 'checked' : ''}></td>
+                <td><span class="inq-dot ${r.read ? 'inq-dot--read' : 'inq-dot--unread'}" title="${r.read ? 'Read' : 'Unread'}"></span></td>
+                <td style="white-space:nowrap;">${escapeHtml(formatDate(r.created_at))}</td>
+                <td class="inq-cell-name">${escapeHtml(r.name)}</td>
+                <td class="inq-cell-email">${escapeHtml(r.email)}</td>
+                <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(r.subject || '—')}</td>
+                <td class="inq-cell-message">${escapeHtml(r.message || '')}</td>
+                <td class="inq-cell-actions">
+                    <button class="inq-icon-btn" title="View" onclick="event.stopPropagation();openDetail('${escapeHtml(r.id)}')"><i class="fas fa-eye"></i></button>
+                    <button class="inq-icon-btn" title="${r.read ? 'Mark unread' : 'Mark read'}" onclick="event.stopPropagation();toggleRead('${escapeHtml(r.id)}')"><i class="fas ${r.read ? 'fa-envelope' : 'fa-envelope-open-text'}"></i></button>
+                    <button class="inq-icon-btn inq-icon-btn--danger" title="Delete" onclick="event.stopPropagation();deleteInq('${escapeHtml(r.id)}')"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>`).join('');
+
+        tbody.querySelectorAll('tr[data-id]').forEach(tr => {
+            tr.addEventListener('click', () => openDetail(tr.dataset.id));
+            const cb = tr.querySelector('.row-check');
+            cb.addEventListener('click', e => e.stopPropagation());
+            cb.addEventListener('change', () => {
+                if (cb.checked) selectedIds.add(cb.dataset.id);
+                else selectedIds.delete(cb.dataset.id);
+                updateCheckAll();
+                updateSelCount();
+            });
+        });
     }
-    tbody.innerHTML = filtered.map(r => `
-        <tr class="${r.read ? '' : 'inq-row--unread'}" data-id="${escapeHtml(r.id)}">
-            <td><span class="inq-dot ${r.read ? 'inq-dot--read' : 'inq-dot--unread'}" title="${r.read ? 'Read' : 'Unread'}"></span></td>
-            <td style="white-space:nowrap;">${escapeHtml(formatDate(r.created_at))}</td>
-            <td class="inq-cell-name">${escapeHtml(r.name)}</td>
-            <td class="inq-cell-email">${escapeHtml(r.email)}</td>
-            <td style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(r.subject || '—')}</td>
-            <td class="inq-cell-message">${escapeHtml(r.message || '')}</td>
-            <td class="inq-cell-actions">
-                <button class="inq-icon-btn" title="View" onclick="event.stopPropagation();openDetail('${escapeHtml(r.id)}')"><i class="fas fa-eye"></i></button>
-                <button class="inq-icon-btn" title="${r.read ? 'Mark unread' : 'Mark read'}" onclick="event.stopPropagation();toggleRead('${escapeHtml(r.id)}')"><i class="fas ${r.read ? 'fa-envelope' : 'fa-envelope-open-text'}"></i></button>
-                <button class="inq-icon-btn inq-icon-btn--danger" title="Delete" onclick="event.stopPropagation();deleteInq('${escapeHtml(r.id)}')"><i class="fas fa-trash"></i></button>
-            </td>
-        </tr>`).join('');
-    tbody.querySelectorAll('tr[data-id]').forEach(tr => {
-        tr.addEventListener('click', () => openDetail(tr.dataset.id));
-    });
+    updateCheckAll();
+    updateSelCount();
 }
 
 async function loadInquiries() {
@@ -233,12 +275,16 @@ async function deleteInq(id) {
 }
 
 function exportCsv() {
-    const rows = allRows.filter(r => {
-        if (currentFilter === 'unread') return !r.read;
-        if (currentFilter === 'read') return r.read;
-        return true;
-    });
-    if (!rows.length) { showToast(currentLang === 'zh' ? '没有可导出的数据' : 'Nothing to export', 'error'); return; }
+    // 只导出勾选的询盘；未勾选时提示先选择
+    if (!selectedIds.size) {
+        showToast(currentLang === 'zh' ? '请先勾选要导出的询盘' : 'Please select inquiries to export first', 'error');
+        return;
+    }
+    const rows = allRows.filter(r => selectedIds.has(r.id));
+    if (!rows.length) {
+        showToast(currentLang === 'zh' ? '没有可导出的数据' : 'Nothing to export', 'error');
+        return;
+    }
     const csvRows = [['Date', 'Name', 'Email', 'Subject', 'Message', 'Status']];
     rows.forEach(r => csvRows.push([
         new Date(r.created_at).toLocaleString(), r.name, r.email, r.subject || '',
@@ -252,7 +298,7 @@ function exportCsv() {
     a.download = 'inquiries-' + d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0') + '.csv';
     a.click();
     URL.revokeObjectURL(a.href);
-    showToast(currentLang === 'zh' ? 'CSV 已导出' : 'CSV exported');
+    showToast((currentLang === 'zh' ? '已导出 ' : 'Exported ') + rows.length + (currentLang === 'zh' ? ' 条询盘' : ' inquiries'));
 }
 
 (async () => {
@@ -269,6 +315,14 @@ function exportCsv() {
     });
     document.getElementById('exportBtn').addEventListener('click', exportCsv);
     document.getElementById('refreshBtn').addEventListener('click', async () => { await loadInquiries(); showToast(currentLang === 'zh' ? '已刷新' : 'Refreshed'); });
+    document.getElementById('checkAll').addEventListener('change', () => {
+        const all = document.getElementById('checkAll').checked;
+        getFilteredRows().forEach(r => {
+            if (all) selectedIds.add(r.id);
+            else selectedIds.delete(r.id);
+        });
+        render();
+    });
     document.getElementById('dClose').addEventListener('click', closeDetail);
     document.getElementById('dToggleRead').addEventListener('click', () => { if (currentRow) toggleRead(currentRow.id); });
     document.getElementById('dDelete').addEventListener('click', () => { if (currentRow) deleteInq(currentRow.id); });

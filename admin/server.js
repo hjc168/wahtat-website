@@ -593,7 +593,7 @@ function getSupabaseConfig() {
     }
 }
 
-async function supabaseRest(method, pathName, body) {
+async function supabaseRest(method, pathName, body, attempts) {
     const cfg = getSupabaseConfig();
     if (!cfg) {
         const err = new Error('Supabase not configured. Create admin/data/supabase-config.json (see supabase-config.example.json).');
@@ -608,18 +608,28 @@ async function supabaseRest(method, pathName, body) {
     if (method === 'GET') headers['Accept'] = 'application/json';
     else headers['Prefer'] = 'return=representation';
 
-    const res = await fetch(cfg.supabaseUrl + '/rest/v1/' + pathName, {
-        method,
-        headers,
-        body: body ? JSON.stringify(body) : undefined
-    });
-    if (!res.ok) {
-        const err = new Error('Supabase request failed (HTTP ' + res.status + ')');
-        err.status = 502;
-        throw err;
+    const maxTries = attempts || 3;
+    let lastErr = null;
+    for (let i = 0; i < maxTries; i++) {
+        try {
+            const res = await fetch(cfg.supabaseUrl + '/rest/v1/' + pathName, {
+                method,
+                headers,
+                body: body ? JSON.stringify(body) : undefined
+            });
+            if (res.ok) {
+                const text = await res.text();
+                return text ? JSON.parse(text) : null;
+            }
+            const err = new Error('Supabase request failed (HTTP ' + res.status + ')');
+            err.status = 502;
+            throw err;
+        } catch (e) {
+            lastErr = e;
+            if (i < maxTries - 1) await new Promise(r => setTimeout(r, 1500)); // 网络抖动重试
+        }
     }
-    const text = await res.text();
-    return text ? JSON.parse(text) : null;
+    throw lastErr;
 }
 
 // GET /api/inquiries?unread=1 — 询盘列表（最新在前）
