@@ -1,6 +1,7 @@
 -- ═══════════════════════════════════════════════════════════
 -- Wah Tat 询盘表 (Inquiries)
 -- 使用方法：Supabase 控制台 → SQL Editor → 粘贴本文件全部内容 → Run
+-- 本脚本幂等，可重复执行
 -- ═══════════════════════════════════════════════════════════
 
 -- 询盘表
@@ -16,6 +17,18 @@ create table if not exists public.inquiries (
 
 -- 启用行级安全 (RLS)
 alter table public.inquiries enable row level security;
+
+-- 清除该表上所有旧策略（保证幂等）
+do $$
+declare pol record;
+begin
+  for pol in
+    select policyname from pg_policies
+    where schemaname = 'public' and tablename = 'inquiries'
+  loop
+    execute format('drop policy if exists %I on public.inquiries', pol.policyname);
+  end loop;
+end $$;
 
 -- 匿名访客（网站前端）只允许 INSERT（提交询盘），不允许读取/修改/删除
 create policy "anon can insert inquiries"
