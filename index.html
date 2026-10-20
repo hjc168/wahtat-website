@@ -571,7 +571,8 @@
             gap: 14px;
         }
         .product-card__main { position: absolute; inset: 0; display: block; z-index: 1; }
-        .product-card__fest { position: absolute; left: 24px; bottom: 24px; z-index: 2; display: flex; flex-direction: row; gap: 10px; }
+        .product-card__fest { position: absolute; left: 24px; right: 24px; bottom: 24px; z-index: 2; display: flex; flex-direction: row; justify-content: space-between; }
+        .product-card--holiday .product-card__content { display: none; }
         .product-card__fest-btn {
             display: inline-flex; align-items: center; gap: 6px;
             padding: 10px 16px; border: 1.5px solid rgba(255, 255, 255, 0.9); border-radius: 50px;
@@ -1096,7 +1097,7 @@
             .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
             .hero { height: 70vh; min-height: 450px; }
             .hero__play { right: 20px; bottom: 76px; width: 54px; height: 54px; font-size: 17px; }
-            .product-card__fest { flex-direction: column; gap: 8px; }
+            .product-card__fest { left: 16px; right: 16px; bottom: 16px; }
             .hero__quote { font-size: 18px; }
         }
 
@@ -1229,7 +1230,7 @@
                         <span class="product-card__arrow" data-en="Explore Autumn" data-zh="探索秋季系列">Explore Autumn <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
-                <div class="product-card">
+                <div class="product-card product-card--holiday">
                     <a href="products/seasonal-festive.html" class="product-card__main" aria-label="Holiday Collection">
                         <img class="product-card__img" src="image/home-material/home-products-material/productsthree.jpg" alt="Holiday Collection" loading="lazy">
                         <div class="product-card__text">
