@@ -159,6 +159,14 @@
         .page-banner__breadcrumb { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 16px; }
         .page-banner__title { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -0.5px; }
 
+        /* ===== FESTIVAL HERO ===== */
+        .festival-hero { padding: 48px 0 0; }
+        .festival-hero__img { width: 100%; border-radius: 16px; box-shadow: 0 16px 50px rgba(26, 29, 32, 0.12); display: block; }
+        @media (max-width: 768px) {
+            .festival-hero { padding: 24px 0 0; }
+            .festival-hero__img { border-radius: 12px; }
+        }
+
         /* ===== GALLERY ===== */
         .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
         .gallery-item { border-radius: 12px; overflow: hidden; aspect-ratio: 1; background: #e0e0e0; transition: var(--transition); }
@@ -209,7 +217,17 @@
             <nav class="header__nav" id="mainNav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="../" class="nav__link" data-en="Home" data-zh="首页">Home</a></li>
-                    <li class="nav__item"><a href="./" class="nav__link active" data-en="Products" data-zh="产品">Products</a></li>
+                    <li class="nav__item">
+                        <a href="./" class="nav__link active" data-en="Products" data-zh="产品">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav__dropdown">
+                            <a href="./" data-en="Products" data-zh="产品">Products</a>
+                            <a href="./floral-plants.html" data-en="Floral, Plants &amp; Greeneries" data-zh="仿真花卉、植物与绿色植物">Floral, Plants &amp; Greeneries</a>
+                            <a href="./home-decor.html" data-en="Home Décor Accents" data-zh="家居装饰精品">Home Décor Accents</a>
+                            <a href="./seasonal-festive.html" data-en="Seasonal &amp; Festive Décor" data-zh="节庆装饰系列">Seasonal &amp; Festive Décor</a>
+                            <a href="./halloween.html" data-en="Halloween Collection" data-zh="万圣节系列">Halloween Collection</a>
+                            <a href="./christmas.html" data-en="Christmas Collection" data-zh="圣诞系列">Christmas Collection</a>
+                        </div>
+                    </li>
                     <li class="nav__item">
                         <a href="#" class="nav__link" data-en="Sustainability &amp; Innovation" data-zh="可持续发展与创新">Sustainability &amp; Innovation <i class="fas fa-chevron-down"></i></a>
                         <div class="nav__dropdown">
@@ -254,12 +272,10 @@
         </div>
     </div>
 
-    <!-- ===== PAGE BANNER ===== -->
-    <section class="page-banner">
-        <div class="page-banner__bg" style="background: linear-gradient(135deg, rgba(20,50,32,0.85) 0%, rgba(192,57,43,0.6) 100%), url('../image/products/holiday/Christmas.jpg') center/cover no-repeat;"></div>
-        <div class="container page-banner__content">
-            <p class="page-banner__breadcrumb" data-en="Products | Seasonal & Festive | Christmas" data-zh="产品 | 节庆装饰 | 圣诞">Products | Seasonal & Festive | Christmas</p>
-            <h1 class="page-banner__title" data-en="Christmas Collection" data-zh="圣诞系列">Christmas Collection</h1>
+    <!-- ===== BANNER（用户设计图原样展示） ===== -->
+    <section class="festival-hero">
+        <div class="container">
+            <img class="festival-hero__img" src="../image/products/holiday/Christmas.jpg" alt="Christmas Collection" loading="eager">
         </div>
     </section>
 
@@ -267,7 +283,7 @@
     <section class="section">
         <div class="container">
             <div class="section__header">
-                <p class="section__label" data-en="Holiday Season" data-zh="节日季">Holiday Season</p>
+                <p class="section__label" data-en="Seasonal & Festive · Christmas" data-zh="节庆装饰 · 圣诞">Seasonal & Festive · Christmas</p>
                 <h2 class="section__title" data-en="A Christmas to Remember" data-zh="难忘的圣诞时光">A Christmas to Remember</h2>
                 <p class="section__subtitle" data-en="From lifelike Christmas trees and elegant wreaths to shimmering ornaments and festive floral arrangements, our Christmas collection brings enduring holiday warmth to homes and businesses alike — beautifully realistic, sustainably made, ready to celebrate year after year." data-zh="从栩栩如生的圣诞树、优雅的花环，到闪耀的饰品与节日花艺，我们的圣诞系列为家居与商业空间带来恒久的节日温暖——逼真美观、绿色环保，年年可循环使用。">
                     From lifelike Christmas trees and elegant wreaths to shimmering ornaments and festive floral arrangements, our Christmas collection brings enduring holiday warmth to homes and businesses alike — beautifully realistic, sustainably made, ready to celebrate year after year.
@@ -280,12 +296,10 @@
     <section class="section section--cream">
         <div class="container">
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1576919228236.jpg" alt="Christmas tree decorations" loading="lazy"></div>
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1512499617640.jpg" alt="Christmas decor 2" loading="lazy"></div>
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1543589077.jpg" alt="Christmas decor 3" loading="lazy"></div>
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1513297887119.jpg" alt="Christmas decor 4" loading="lazy"></div>
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1606890737304.jpg" alt="Christmas decor 5" loading="lazy"></div>
-                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1482517967863.jpg" alt="Christmas decor 6" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/products/1784254238771-236419517.png" alt="Christmas wreath" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1576919228236.jpg" alt="Christmas tree" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1512499617640.jpg" alt="Christmas tree with star" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1543589077.jpg" alt="Christmas star" loading="lazy"></div>
             </div>
             <div style="text-align:center;margin-top:40px;">
                 <p style="font-size:14px;color:var(--color-text-light);" data-en="This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services." data-zh="以上是我们超过30,000款设计中的精选部分。我们很乐意了解您的需要，为您度身订造适合的产品和服务。">This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services.</p>

@@ -570,6 +570,20 @@
             border-color: var(--color-magenta);
             gap: 14px;
         }
+        .product-card__main { position: absolute; inset: 0; display: block; z-index: 1; }
+        .product-card__fest { position: absolute; left: 24px; bottom: 24px; z-index: 2; display: flex; flex-direction: row; gap: 10px; }
+        .product-card__fest-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 16px; border: 1.5px solid rgba(255, 255, 255, 0.9); border-radius: 50px;
+            background: rgba(0, 0, 0, 0.35); color: #fff; font-size: 12px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+            transition: var(--transition); cursor: pointer;
+        }
+        .product-card__fest-btn:hover {
+            background: var(--color-magenta);
+            border-color: var(--color-magenta);
+            transform: translateY(-2px);
+        }
 
         /* ===== GLOBAL REACH ===== */
         .global-reach {
@@ -1082,6 +1096,7 @@
             .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
             .hero { height: 70vh; min-height: 450px; }
             .hero__play { right: 20px; bottom: 76px; width: 54px; height: 54px; font-size: 17px; }
+            .product-card__fest { flex-direction: column; gap: 8px; }
             .hero__quote { font-size: 18px; }
         }
 
@@ -1105,7 +1120,17 @@
             <nav class="header__nav" id="mainNav">
                 <ul class="nav__list">
                     <li class="nav__item"><a href="#" class="nav__link active" data-en="Home" data-zh="首页">Home</a></li>
-                    <li class="nav__item"><a href="products/" class="nav__link" data-en="Products" data-zh="产品">Products</a></li>
+                    <li class="nav__item">
+                        <a href="products/" class="nav__link" data-en="Products" data-zh="产品">Products <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav__dropdown">
+                            <a href="products/" data-en="Products" data-zh="产品">Products</a>
+                            <a href="products/floral-plants.html" data-en="Floral, Plants &amp; Greeneries" data-zh="仿真花卉、植物与绿色植物">Floral, Plants &amp; Greeneries</a>
+                            <a href="products/home-decor.html" data-en="Home Décor Accents" data-zh="家居装饰精品">Home Décor Accents</a>
+                            <a href="products/seasonal-festive.html" data-en="Seasonal &amp; Festive Décor" data-zh="节庆装饰系列">Seasonal &amp; Festive Décor</a>
+                            <a href="products/halloween.html" data-en="Halloween Collection" data-zh="万圣节系列">Halloween Collection</a>
+                            <a href="products/christmas.html" data-en="Christmas Collection" data-zh="圣诞系列">Christmas Collection</a>
+                        </div>
+                    </li>
                     <li class="nav__item">
                         <a href="#" class="nav__link" data-en="Sustainability &amp; Innovation" data-zh="可持续发展与创新">Sustainability &amp; Innovation <i class="fas fa-chevron-down"></i></a>
                         <div class="nav__dropdown">
@@ -1204,16 +1229,22 @@
                         <span class="product-card__arrow" data-en="Explore Autumn" data-zh="探索秋季系列">Explore Autumn <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="products/seasonal-festive.html" class="product-card">
-                    <img class="product-card__img" src="image/home-material/home-products-material/productsthree.jpg" alt="Holiday Collection" loading="lazy">
-                    <div class="product-card__text">
-                        <p class="product-card__label" data-en="Holiday Collection" data-zh="节日系列">Holiday Collection</p>
-                        <h3 class="product-card__title" data-en="Halloween &amp; Christmas Florals" data-zh="万圣节与圣诞节花艺">Halloween &amp; Christmas Florals</h3>
+                <div class="product-card">
+                    <a href="products/seasonal-festive.html" class="product-card__main" aria-label="Holiday Collection">
+                        <img class="product-card__img" src="image/home-material/home-products-material/productsthree.jpg" alt="Holiday Collection" loading="lazy">
+                        <div class="product-card__text">
+                            <p class="product-card__label" data-en="Holiday Collection" data-zh="节日系列">Holiday Collection</p>
+                            <h3 class="product-card__title" data-en="Halloween &amp; Christmas Florals" data-zh="万圣节与圣诞节花艺">Halloween &amp; Christmas Florals</h3>
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__arrow" data-en="Explore Holidays" data-zh="探索节日系列">Explore Holidays <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <div class="product-card__fest">
+                        <a href="products/halloween.html" class="product-card__fest-btn" data-en="🎃 Halloween" data-zh="🎃 万圣节">🎃 Halloween</a>
+                        <a href="products/christmas.html" class="product-card__fest-btn" data-en="🎄 Christmas" data-zh="🎄 圣诞">🎄 Christmas</a>
                     </div>
-                    <div class="product-card__content">
-                        <span class="product-card__arrow" data-en="Explore Holidays" data-zh="探索节日系列">Explore Holidays <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
