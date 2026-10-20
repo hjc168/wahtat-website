@@ -160,11 +160,32 @@
         .page-banner__title { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -0.5px; }
 
         /* ===== FESTIVAL HERO ===== */
-        .festival-hero { padding: 48px 0 0; }
-        .festival-hero__img { width: 100%; border-radius: 16px; box-shadow: 0 16px 50px rgba(26, 29, 32, 0.12); display: block; }
+        /* ===== FESTIVAL HERO (design split & rebuilt) ===== */
+        .fest-hero__photo {
+            width: 100%;
+            aspect-ratio: 2290 / 560;
+            min-height: 240px;
+            background-size: cover;
+            background-position: center;
+        }
+        .fest-hero__titleband { padding: 76px 0 84px; text-align: center; }
+        .fest-hero--halloween .fest-hero__titleband { background: #0e0d13; color: #fff; }
+        .fest-hero--christmas .fest-hero__titleband { background: #faf8f3; color: #1a1d20; }
+        .fest-hero__caption {
+            font-size: 12px; font-weight: 700; letter-spacing: 4px;
+            text-transform: uppercase; opacity: 0.6;
+        }
+        .fest-hero__title {
+            font-family: var(--font-serif); font-weight: 700;
+            font-size: clamp(44px, 8vw, 92px); line-height: 1.08;
+            letter-spacing: 8px; text-transform: uppercase;
+            margin: 18px 0 16px;
+        }
+        .fest-hero__sub { font-size: 15px; opacity: 0.7; max-width: 560px; margin: 0 auto; }
         @media (max-width: 768px) {
-            .festival-hero { padding: 24px 0 0; }
-            .festival-hero__img { border-radius: 12px; }
+            .fest-hero__photo { min-height: 190px; }
+            .fest-hero__titleband { padding: 52px 0 60px; }
+            .fest-hero__title { letter-spacing: 4px; }
         }
 
         /* ===== GALLERY ===== */
@@ -273,9 +294,14 @@
     </div>
 
     <!-- ===== BANNER（用户设计图原样展示） ===== -->
-    <section class="festival-hero">
-        <div class="container">
-            <img class="festival-hero__img" src="../image/products/holiday/Christmas.jpg" alt="Christmas Collection" loading="eager">
+    <section class="fest-hero fest-hero--christmas">
+        <div class="fest-hero__photo" style="background-image: url('../image/products/holiday/Christmas-bg.jpg');"></div>
+        <div class="fest-hero__titleband">
+            <div class="container">
+                <p class="fest-hero__caption" data-en="Seasonal & Festive Decor" data-zh="节庆装饰系列">Seasonal & Festive Decor</p>
+                <h1 class="fest-hero__title" data-en="Christmas" data-zh="圣诞">Christmas</h1>
+                <p class="fest-hero__sub" data-en="Warmth and wonder, beautifully made." data-zh="节日的温暖与奇妙，精美呈现。">Warmth and wonder, beautifully made.</p>
+            </div>
         </div>
     </section>
 
