@@ -37,12 +37,17 @@
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-sans);
-            color: var(--color-text);
-            background: var(--color-white);
+            color: #fff;
+            background: url('../image/products/holiday/Halloween/Halloween-page-bg.jpg') fixed center / cover no-repeat;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        /* 全页暗背景下的文字配色 */
+        .section--cream { background: transparent; }
+        .section__label { color: #b7a6ff; }
+        .section__title { color: #fff; }
+        .section__subtitle { color: rgba(255, 255, 255, 0.75); }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         img, video { max-width: 100%; display: block; }
@@ -161,23 +166,25 @@
 
         /* ===== FESTIVAL HERO ===== */
         /* ===== FESTIVAL HERO (design split & rebuilt) ===== */
-        .fest-hero { position: relative; overflow: hidden; }
-        .fest-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; }
-        .fest-hero__inner { position: relative; padding: 150px 0 160px; }
-        .fest-hero__text { max-width: 720px; color: #fff; }
-        .fest-hero__caption {
-            font-size: 12px; font-weight: 700; letter-spacing: 4px;
-            text-transform: uppercase; opacity: 0.7; margin-bottom: 18px;
+        .fest-hero { position: relative; }
+        .fest-hero__inner { position: relative; padding: 130px 0 90px; }
+        .fest-hero__text { max-width: 760px; color: #fff; }
+        .fest-hero__badge {
+            display: inline-block; padding: 7px 18px; border-radius: 50px;
+            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 22px;
         }
         .fest-hero__title {
             font-family: var(--font-serif); font-weight: 700;
-            font-size: clamp(48px, 9vw, 110px); line-height: 1.05;
-            letter-spacing: 6px; text-transform: uppercase; margin: 0;
+            font-size: clamp(40px, 7vw, 84px); line-height: 1.12;
+            letter-spacing: 4px; margin: 0;
         }
-        .fest-hero__sub { font-size: 16px; opacity: 0.8; margin-top: 20px; max-width: 480px; }
+        .fest-hero__sub { font-size: 16px; opacity: 0.85; margin-top: 20px; max-width: 520px; letter-spacing: 1px; }
         @media (max-width: 768px) {
-            .fest-hero__inner { padding: 96px 0 110px; }
-            .fest-hero__title { letter-spacing: 3px; }
+            .fest-hero__title { letter-spacing: 2px; }
+        }
+
         }
         
         }
@@ -289,14 +296,11 @@
 
     <!-- ===== BANNER（用户设计图原样展示） ===== -->
     <section class="fest-hero fest-hero--halloween">
-        <div class="fest-hero__bg" style="background-image: url('../image/products/holiday/Halloween/Halloween-hero-bg.jpg');"></div>
-        <div class="fest-hero__inner">
-            <div class="container fest-hero__grid">
-                <div class="fest-hero__text">
-                    <p class="fest-hero__caption" data-en="Seasonal &amp; Festive Decor" data-zh="节庆装饰系列">Seasonal &amp; Festive Decor</p>
-                    <h1 class="fest-hero__title" data-en="Halloween" data-zh="万圣节">Halloween</h1>
-                    <p class="fest-hero__sub" data-en="Spooky season, elegantly crafted." data-zh="搞怪季节，优雅呈现。">Spooky season, elegantly crafted.</p>
-                </div>
+        <div class="container">
+            <div class="fest-hero__text">
+                <span class="fest-hero__badge" data-en="Factory Direct" data-zh="工厂直供">Factory Direct</span>
+                <h1 class="fest-hero__title" data-en="Halloween Artificial Florals" data-zh="万圣节仿真花艺">Halloween Artificial Florals</h1>
+                <p class="fest-hero__sub" data-en="Dark-Themed Bouquets · Twig Décor · Scene Styling" data-zh="暗黑主体花束·枯枝装饰·场景布置">Dark-Themed Bouquets · Twig Décor · Scene Styling</p>
             </div>
         </div>
     </section>
@@ -307,8 +311,8 @@
             <div class="section__header">
                 <p class="section__label" data-en="Seasonal & Festive · Halloween" data-zh="节庆装饰 · 万圣节">Seasonal & Festive · Halloween</p>
                 <h2 class="section__title" data-en="Bring the Magic of Halloween Home" data-zh="把万圣节的魔幻带回家">Bring the Magic of Halloween Home</h2>
-                <p class="section__subtitle" data-en="From hauntingly beautiful artificial pumpkins and gnarled spooky vines to dark, dramatic florals and autumn foliage, our Halloween collection sets the perfect eerie scene — year after year, without the mess." data-zh="从惟妙惟肖的人造南瓜、曲折诡异的藤蔓，到暗黑戏剧感的花艺与秋日枝叶，我们的万圣节系列为您营造完美的搞怪氛围——年复一年，无需打理。">
-                    From hauntingly beautiful artificial pumpkins and gnarled spooky vines to dark, dramatic florals and autumn foliage, our Halloween collection sets the perfect eerie scene — year after year, without the mess.
+                <p class="section__subtitle" data-en="From hauntingly beautiful artificial pumpkins and gnarled spooky vines to dark, dramatic florals and autumn foliage, our Halloween collection sets the perfect eerie scene — year after year, without the mess. This is a curated selection from our collection of over 30,000 designs; we would be happy to understand your needs and provide tailored products and services." data-zh="从惟妙惟肖的人造南瓜、曲折诡异的藤蔓，到暗黑戏剧感的花艺与秋日枝叶，我们的万圣节系列为您营造完美的搞怪氛围——年复一年，无需打理。以上是我们超过30,000款设计中的精选部分，我们很乐意了解您的需求，为您度身订造适合的产品和服务。">
+                    From hauntingly beautiful artificial pumpkins and gnarled spooky vines to dark, dramatic florals and autumn foliage, our Halloween collection sets the perfect eerie scene — year after year, without the mess. This is a curated selection from our collection of over 30,000 designs; we would be happy to understand your needs and provide tailored products and services.
                 </p>
             </div>
         </div>
@@ -322,9 +326,6 @@
                 <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1512389098783.jpg" alt="Halloween decor" loading="lazy"></div>
                 <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1441974231531.jpg" alt="Halloween forest" loading="lazy"></div>
                 <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1481833761820.jpg" alt="Halloween mood" loading="lazy"></div>
-            </div>
-            <div style="text-align:center;margin-top:40px;">
-                <p style="font-size:14px;color:var(--color-text-light);" data-en="This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services." data-zh="以上是我们超过30,000款设计中的精选部分。我们很乐意了解您的需要，为您度身订造适合的产品和服务。">This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services.</p>
             </div>
         </div>
     </section>
