@@ -37,17 +37,12 @@
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-sans);
-            color: #fff;
-            background: url('../image/products/holiday/Halloween/Halloween-page-bg.jpg') fixed center / cover no-repeat;
+            color: var(--color-text);
+            background: var(--color-white);
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* 全页暗背景下的文字配色 */
-        .section--cream { background: transparent; }
-        .section__label { color: #b7a6ff; }
-        .section__title { color: #fff; }
-        .section__subtitle { color: rgba(255, 255, 255, 0.75); }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         img, video { max-width: 100%; display: block; }
@@ -166,23 +161,35 @@
 
         /* ===== FESTIVAL HERO ===== */
         /* ===== FESTIVAL HERO (design split & rebuilt) ===== */
-        .fest-hero { position: relative; }
-        .fest-hero__inner { position: relative; padding: 130px 0 90px; }
-        .fest-hero__text { max-width: 760px; color: #fff; }
+        /* ===== FEST HERO（按设计图 Halloween.jpg 1:1 复刻） ===== */
+        .fest-hero__photo {
+            width: 100%;
+            aspect-ratio: 2290 / 560;
+            background-size: cover;
+            background-position: center;
+        }
+        .fest-hero__band { background: #0e0d13; color: #fff; text-align: center; padding: 64px 0 72px; }
         .fest-hero__badge {
-            display: inline-block; padding: 7px 18px; border-radius: 50px;
-            background: rgba(255, 255, 255, 0.12); border: 1px solid rgba(255, 255, 255, 0.4);
-            color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 3px;
-            text-transform: uppercase; margin-bottom: 22px;
+            display: inline-block; padding: 8px 20px; border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.45);
+            font-size: 13px; font-weight: 700; letter-spacing: 4px;
+            text-transform: uppercase; opacity: 0.9; margin-bottom: 22px;
         }
         .fest-hero__title {
             font-family: var(--font-serif); font-weight: 700;
-            font-size: clamp(40px, 7vw, 84px); line-height: 1.12;
-            letter-spacing: 4px; margin: 0;
+            font-size: clamp(34px, 6.5vw, 78px); line-height: 1.15;
+            letter-spacing: 8px; margin: 0;
         }
-        .fest-hero__sub { font-size: 16px; opacity: 0.85; margin-top: 20px; max-width: 520px; letter-spacing: 1px; }
+        .fest-hero__sub {
+            font-size: 15px; letter-spacing: 2px; opacity: 0.75;
+            margin-top: 20px;
+        }
         @media (max-width: 768px) {
-            .fest-hero__title { letter-spacing: 2px; }
+            .fest-hero__photo { aspect-ratio: 2290 / 700; }
+            .fest-hero__band { padding: 44px 0 52px; }
+            .fest-hero__title { letter-spacing: 4px; }
+        }
+
         }
 
         }
@@ -296,8 +303,9 @@
 
     <!-- ===== BANNER（用户设计图原样展示） ===== -->
     <section class="fest-hero fest-hero--halloween">
-        <div class="container">
-            <div class="fest-hero__text">
+        <div class="fest-hero__photo" style="background-image: url('../image/products/holiday/Halloween/Halloween-bg.jpg');"></div>
+        <div class="fest-hero__band">
+            <div class="container">
                 <span class="fest-hero__badge" data-en="Factory Direct" data-zh="工厂直供">Factory Direct</span>
                 <h1 class="fest-hero__title" data-en="Halloween Artificial Florals" data-zh="万圣节仿真花艺">Halloween Artificial Florals</h1>
                 <p class="fest-hero__sub" data-en="Dark-Themed Bouquets · Twig Décor · Scene Styling" data-zh="暗黑主体花束·枯枝装饰·场景布置">Dark-Themed Bouquets · Twig Décor · Scene Styling</p>
