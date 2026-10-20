@@ -37,12 +37,17 @@
         html { scroll-behavior: smooth; font-size: 16px; }
         body {
             font-family: var(--font-sans);
-            color: var(--color-text);
-            background: var(--color-white);
+            color: #fff;
+            background: url('../image/products/holiday/Halloween/banner3.jpg') fixed center top / cover no-repeat;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
+        /* 全页暗背景下的文字配色（背景图覆盖所有部分） */
+        .section--cream { background: transparent; }
+        .section__label { color: #b7a6ff; }
+        .section__title { color: #fff; }
+        .section__subtitle { color: rgba(255, 255, 255, 0.75); }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; }
         img, video { max-width: 100%; display: block; }
@@ -106,7 +111,7 @@
         .section__header { text-align: center; margin-bottom: 60px; }
         .section__label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-purple); margin-bottom: 16px; }
         .section__title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; line-height: 1.2; letter-spacing: -0.5px; }
-        .section__subtitle { font-size: 16px; color: var(--color-text-light); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .section__subtitle { font-size: 16px; color: rgba(255, 255, 255, 0.7); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
         /* ===== IMAGE + TEXT SPLIT ===== */
         .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -164,9 +169,7 @@
         /* ===== FEST HERO（按设计图 Halloween.jpg 1:1 复刻） ===== */
         .fest-hero__photo {
             width: 100%;
-            aspect-ratio: 2278 / 1280;
-            background-size: cover;
-            background-position: center;
+            aspect-ratio: 2278 / 560;
         }
         .fest-hero__band { background: #0e0d13; color: #fff; text-align: center; padding: 64px 0 72px; }
         .fest-hero__badge {
@@ -185,7 +188,7 @@
             margin-top: 20px;
         }
         @media (max-width: 768px) {
-            .fest-hero__photo { aspect-ratio: 2278 / 1000; }
+            .fest-hero__photo { aspect-ratio: 2278 / 560; }
             .fest-hero__band { padding: 44px 0 52px; }
             .fest-hero__title { letter-spacing: 4px; }
         }
@@ -300,7 +303,7 @@
 
     <!-- ===== BANNER（用户设计图原样展示） ===== -->
     <section class="fest-hero fest-hero--halloween">
-        <div class="fest-hero__photo" style="background-image: url('../image/products/holiday/Halloween/banner1.jpg');"></div>
+        <div class="fest-hero__photo"></div>
         <div class="fest-hero__band">
             <div class="container">
                 <span class="fest-hero__badge" data-en="Factory Direct" data-zh="工厂直供">Factory Direct</span>
