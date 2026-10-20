@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="../image/website-icon/Favicon-300x300.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wah Tat Plant — Christmas Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --color-dark: #32373c;
+            --color-darker: #1a1d20;
+            --color-purple: #5636d1;
+            --color-magenta: #e2498a;
+            --color-green: #2e7d32;
+            --color-teal: #3d8b7d;
+            --color-cream: #f7f5f0;
+            --color-light-gray: #f4f4f4;
+            --color-white: #ffffff;
+            --color-text: #32373c;
+            --color-text-light: #6b7280;
+            --color-border: #e5e7eb;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --container-max: 1280px;
+            --header-height: 80px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img, video { max-width: 100%; display: block; }
+        .container { width: 100%; max-width: var(--container-max); margin: 0 auto; padding: 0 40px; }
+
+        /* ===== BUTTONS ===== */
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; border-radius: 50px; transition: var(--transition); cursor: pointer; border: none; white-space: nowrap; }
+        .btn-primary { background: var(--color-purple); color: #fff; }
+        .btn-primary:hover { background: #4528b0; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(86, 54, 209, 0.35); }
+        .btn-outline { background: transparent; color: var(--color-purple); border: 2px solid var(--color-purple); }
+        .btn-outline:hover { background: var(--color-purple); color: #fff; transform: translateY(-2px); }
+        .btn-white { background: #fff; color: var(--color-dark); }
+        .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); }
+
+        /* ===== HEADER ===== */
+        .header {
+            position: sticky; top: 0; z-index: 1000; background: var(--color-white);
+            box-shadow: 0 1px 0 var(--color-border), 0 4px 20px rgba(0, 0, 0, 0.04);
+            height: var(--header-height); transition: box-shadow var(--transition);
+        }
+        .header.scrolled { box-shadow: 0 2px 0 var(--color-border), 0 8px 30px rgba(0, 0, 0, 0.08); }
+        .header .container { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+        .header__logo { display: flex; align-items: center; flex-shrink: 0; }
+        .header__logo img { height: 44px; width: auto; }
+        .logo-text { display: flex; align-items: baseline; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo-text .ucp { color: var(--color-magenta); font-family: var(--font-serif); font-weight: 700; font-style: italic; font-size: 28px; }
+        .logo-text .group { color: var(--color-dark); margin-left: 6px; font-weight: 600; font-size: 20px; letter-spacing: 1px; }
+
+        .header__nav { display: flex; align-items: center; }
+        .nav__list { display: flex; align-items: center; gap: 4px; }
+        .nav__item { position: relative; }
+        .nav__link { display: flex; align-items: center; gap: 4px; padding: 10px 16px; font-size: 14px; font-weight: 500; color: var(--color-text); border-radius: 6px; transition: var(--transition); white-space: nowrap; }
+        .nav__link:hover, .nav__link.active { color: var(--color-purple); background: rgba(86, 54, 209, 0.05); }
+        .nav__link i { font-size: 10px; transition: transform var(--transition); }
+        .nav__item:hover .nav__link i { transform: rotate(180deg); }
+        .nav__dropdown { position: absolute; top: calc(100% + 8px); left: 0; background: var(--color-white); min-width: 220px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12); opacity: 0; visibility: hidden; transform: translateY(10px); transition: var(--transition); overflow: hidden; border: 1px solid var(--color-border); }
+        .nav__item:hover .nav__dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+        .nav__item:last-child .nav__dropdown { left: auto; right: 0; }
+        .nav__dropdown a { display: block; padding: 12px 20px; font-size: 14px; color: var(--color-text); transition: var(--transition); }
+        .nav__dropdown a:hover { background: rgba(86, 54, 209, 0.05); color: var(--color-purple); padding-left: 24px; }
+
+        .header__actions { display: flex; align-items: center; gap: 12px; }
+        .header__lang { display: flex; align-items: center; gap: 6px; padding: 8px 14px; font-size: 13px; font-weight: 500; border: 1px solid var(--color-border); border-radius: 50px; cursor: pointer; transition: var(--transition); background: transparent; color: var(--color-text); }
+        .header__lang:hover { border-color: var(--color-purple); color: var(--color-purple); }
+        .header__lang i { font-size: 14px; }
+        .header__search { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--color-border); background: transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); color: var(--color-text); font-size: 15px; }
+        .header__search:hover { background: var(--color-purple); color: #fff; border-color: var(--color-purple); }
+        .header__social { color: var(--color-text); font-size: 16px; transition: var(--transition); padding: 8px; }
+        .header__social:hover { color: var(--color-purple); }
+
+        .header__toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 8px; }
+        .header__toggle span { width: 24px; height: 2px; background: var(--color-dark); border-radius: 2px; transition: var(--transition); }
+        .header__toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .header__toggle.active span:nth-child(2) { opacity: 0; }
+        .header__toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+        /* ===== SECTION COMMONS ===== */
+        .section { padding: 100px 0; }
+        .section--cream { background: var(--color-cream); }
+        .section--light { background: var(--color-light-gray); }
+        .section__header { text-align: center; margin-bottom: 60px; }
+        .section__label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--color-purple); margin-bottom: 16px; }
+        .section__title { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 42px); font-weight: 600; line-height: 1.2; letter-spacing: -0.5px; }
+        .section__subtitle { font-size: 16px; color: var(--color-text-light); margin-top: 16px; max-width: 600px; margin-left: auto; margin-right: auto; }
+
+        /* ===== IMAGE + TEXT SPLIT ===== */
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .split--reverse { direction: rtl; }
+        .split--reverse > * { direction: ltr; }
+        .split__image { border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1); }
+        .split__image img { width: 100%; height: auto; transition: transform 0.6s ease; }
+        .split__image:hover img { transform: scale(1.03); }
+        .split__content h2 { font-family: var(--font-serif); font-size: clamp(26px, 3.5vw, 38px); font-weight: 600; line-height: 1.2; margin-bottom: 20px; }
+        .split__content p { font-size: 16px; color: var(--color-text-light); line-height: 1.7; margin-bottom: 28px; }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner { background: linear-gradient(135deg, var(--color-purple) 0%, #6c3fd4 50%, var(--color-magenta) 100%); color: #fff; text-align: center; padding: 80px 0; }
+        .cta-banner h2 { font-family: var(--font-serif); font-size: clamp(28px, 4vw, 40px); margin-bottom: 16px; }
+        .cta-banner p { font-size: 16px; opacity: 0.85; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+        /* ===== FOOTER ===== */
+        .footer { background: var(--color-darker); color: rgba(255, 255, 255, 0.7); padding: 70px 0 0; }
+        .footer__grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 50px; }
+        .footer__brand p { margin-top: 16px; font-size: 14px; line-height: 1.7; }
+        .footer__logo { display: flex; align-items: baseline; }
+        .footer__logo .ucp { color: var(--color-magenta); font-family: var(--font-serif); font-weight: 700; font-style: italic; font-size: 26px; }
+        .footer__logo .group { color: #fff; margin-left: 5px; font-weight: 600; font-size: 18px; letter-spacing: 1px; }
+        .footer h4 { color: #fff; font-size: 14px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+        .footer__links li { margin-bottom: 10px; }
+        .footer__links a { font-size: 14px; color: rgba(255, 255, 255, 0.6); transition: var(--transition); }
+        .footer__links a:hover { color: var(--color-magenta); padding-left: 4px; }
+        .footer__address { font-size: 13px; line-height: 1.8; }
+        .footer__address strong { color: #fff; display: block; margin-top: 16px; }
+        .footer__address strong:first-child { margin-top: 0; }
+        .footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.08); padding: 24px 0; display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+        .footer__social { display: flex; gap: 12px; }
+        .footer__social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.15); display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 14px; }
+        .footer__social a:hover { background: var(--color-magenta); border-color: var(--color-magenta); color: #fff; }
+
+        /* ===== SEARCH OVERLAY ===== */
+        .search-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); z-index: 9999; display: flex; align-items: flex-start; justify-content: center; padding-top: 150px; opacity: 0; visibility: hidden; transition: var(--transition); }
+        .search-overlay.active { opacity: 1; visibility: visible; }
+        .search-overlay__box { width: 100%; max-width: 600px; background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); transform: translateY(-20px); transition: var(--transition); }
+        .search-overlay.active .search-overlay__box { transform: translateY(0); }
+        .search-overlay__input { width: 100%; border: none; border-bottom: 2px solid var(--color-border); padding: 14px 0; font-size: 18px; outline: none; font-family: var(--font-sans); }
+        .search-overlay__input:focus { border-bottom-color: var(--color-purple); }
+        .search-overlay__close { position: absolute; top: 30px; right: 30px; background: none; border: none; color: #fff; font-size: 32px; cursor: pointer; transition: var(--transition); }
+        .search-overlay__close:hover { color: var(--color-magenta); }
+
+        /* ===== PAGE BANNER ===== */
+        .page-banner { position: relative; height: 400px; display: flex; align-items: center; overflow: hidden; }
+        .page-banner__bg { position: absolute; inset: 0; z-index: 0; }
+        .page-banner__content { position: relative; z-index: 1; color: #fff; text-align: center; }
+        .page-banner__breadcrumb { font-size: 13px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.8; margin-bottom: 16px; }
+        .page-banner__title { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 52px); font-weight: 600; letter-spacing: -0.5px; }
+
+        /* ===== GALLERY ===== */
+        .gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+        .gallery-item { border-radius: 12px; overflow: hidden; aspect-ratio: 1; background: #e0e0e0; transition: var(--transition); }
+        .gallery-item:hover { transform: scale(1.03); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .gallery-item:hover img { transform: scale(1.08); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .container { padding: 0 24px; }
+            .nav__list { gap: 0; }
+            .nav__link { padding: 10px 12px; font-size: 13px; }
+            .footer__grid { grid-template-columns: 1fr 1fr; }
+            .split { gap: 40px; }
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        @media (max-width: 768px) {
+            :root { --header-height: 64px; }
+            .section { padding: 60px 0; }
+            .container { padding: 0 20px; }
+            .header__nav { position: fixed; top: var(--header-height); left: 0; right: 0; bottom: 0; background: #fff; flex-direction: column; align-items: flex-start; padding: 24px; transform: translateX(100%); transition: transform 0.4s ease; overflow-y: auto; z-index: 999; }
+            .header__nav.open { transform: translateX(0); }
+            .nav__list { flex-direction: column; align-items: stretch; width: 100%; gap: 4px; }
+            .nav__link { padding: 14px 16px; font-size: 16px; justify-content: space-between; }
+            .nav__dropdown { position: static; box-shadow: none; border: none; border-radius: 0; opacity: 1; visibility: visible; transform: none; background: var(--color-light-gray); display: none; margin: 0 16px; border-radius: 8px; }
+            .nav__item.open .nav__dropdown { display: block; }
+            .header__toggle { display: flex; }
+            .header__actions { display: none; }
+            .split { grid-template-columns: 1fr; gap: 30px; }
+            .footer__grid { grid-template-columns: 1fr; gap: 30px; }
+            .footer__bottom { flex-direction: column; gap: 16px; text-align: center; }
+            .page-banner { height: 280px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="container">
+            <a href="../" class="header__logo">
+                <img src="../image/home-material/home-icon/cropped-WAH-TAT-WEBSITE-LOGO_202407-1-scaled-300x108.png" alt="Wah Tat Plant" height="44">
+            </a>
+            <nav class="header__nav" id="mainNav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="../" class="nav__link" data-en="Home" data-zh="首页">Home</a></li>
+                    <li class="nav__item"><a href="./" class="nav__link active" data-en="Products" data-zh="产品">Products</a></li>
+                    <li class="nav__item">
+                        <a href="#" class="nav__link" data-en="Sustainability &amp; Innovation" data-zh="可持续发展与创新">Sustainability &amp; Innovation <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav__dropdown">
+                            <a href="../sustainability/" data-en="Our Breakthroughs" data-zh="我们的突破">Our Breakthroughs</a>
+                            <a href="../sustainability/climate-change.html" data-en="Climate Change" data-zh="气候变化">Climate Change</a>
+                            <a href="../sustainability/sustainable-materials.html" data-en="Sustainable Materials" data-zh="可持续物料">Sustainable Materials</a>
+                            <a href="../sustainability/green-manufacturing.html" data-en="Green Manufacturing" data-zh="绿色生产">Green Manufacturing</a>
+                        </div>
+                    </li>
+                    <li class="nav__item"><a href="../contact/" class="nav__link" data-en="Contact Us" data-zh="联系我们">Contact Us</a></li>
+                    <li class="nav__item">
+                        <a href="../about/" class="nav__link" data-en="About Us" data-zh="关于我们">About Us <i class="fas fa-chevron-down"></i></a>
+                        <div class="nav__dropdown">
+                            <a href="../about/" data-en="Corporate Overview" data-zh="企业概况">Corporate Overview</a>
+                            <a href="../about/history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="header__actions">
+                <button class="header__lang" aria-label="Language">
+                    <i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down" style="font-size:10px"></i>
+                </button>
+                <button class="header__search" id="searchBtn" aria-label="Search">
+                    <i class="fas fa-search"></i>
+                </button>
+                <a href="https://linkedin.com" class="header__social" aria-label="LinkedIn" target="_blank" rel="noopener">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+            </div>
+            <button class="header__toggle" id="mobileToggle" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- ===== SEARCH OVERLAY ===== -->
+    <div class="search-overlay" id="searchOverlay">
+        <button class="search-overlay__close" id="searchClose">&times;</button>
+        <div class="search-overlay__box">
+            <input type="text" class="search-overlay__input" placeholder="Search Wah Tat Plant..." autofocus>
+        </div>
+    </div>
+
+    <!-- ===== PAGE BANNER ===== -->
+    <section class="page-banner">
+        <div class="page-banner__bg" style="background: linear-gradient(135deg, rgba(20,50,32,0.85) 0%, rgba(192,57,43,0.6) 100%), url('../image/products/holiday/Christmas.jpg') center/cover no-repeat;"></div>
+        <div class="container page-banner__content">
+            <p class="page-banner__breadcrumb" data-en="Products | Seasonal & Festive | Christmas" data-zh="产品 | 节庆装饰 | 圣诞">Products | Seasonal & Festive | Christmas</p>
+            <h1 class="page-banner__title" data-en="Christmas Collection" data-zh="圣诞系列">Christmas Collection</h1>
+        </div>
+    </section>
+
+    <!-- ===== DESCRIPTION ===== -->
+    <section class="section">
+        <div class="container">
+            <div class="section__header">
+                <p class="section__label" data-en="Holiday Season" data-zh="节日季">Holiday Season</p>
+                <h2 class="section__title" data-en="A Christmas to Remember" data-zh="难忘的圣诞时光">A Christmas to Remember</h2>
+                <p class="section__subtitle" data-en="From lifelike Christmas trees and elegant wreaths to shimmering ornaments and festive floral arrangements, our Christmas collection brings enduring holiday warmth to homes and businesses alike — beautifully realistic, sustainably made, ready to celebrate year after year." data-zh="从栩栩如生的圣诞树、优雅的花环，到闪耀的饰品与节日花艺，我们的圣诞系列为家居与商业空间带来恒久的节日温暖——逼真美观、绿色环保，年年可循环使用。">
+                    From lifelike Christmas trees and elegant wreaths to shimmering ornaments and festive floral arrangements, our Christmas collection brings enduring holiday warmth to homes and businesses alike — beautifully realistic, sustainably made, ready to celebrate year after year.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT GALLERY ===== -->
+    <section class="section section--cream">
+        <div class="container">
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1576919228236.jpg" alt="Christmas tree decorations" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1512499617640.jpg" alt="Christmas decor 2" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1543589077.jpg" alt="Christmas decor 3" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1513297887119.jpg" alt="Christmas decor 4" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1606890737304.jpg" alt="Christmas decor 5" loading="lazy"></div>
+                <div class="gallery-item"><img src="../image/site-images/unsplash/photo-1482517967863.jpg" alt="Christmas decor 6" loading="lazy"></div>
+            </div>
+            <div style="text-align:center;margin-top:40px;">
+                <p style="font-size:14px;color:var(--color-text-light);" data-en="This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services." data-zh="以上是我们超过30,000款设计中的精选部分。我们很乐意了解您的需要，为您度身订造适合的产品和服务。">This is a curated selection from our collection of over 30,000 designs. We would be happy to understand your needs and provide tailored products and services.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== INQUIRY CTA ===== -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 data-en="Custom Orders Welcome" data-zh="欢迎定制订单">Custom Orders Welcome</h2>
+            <p data-en="We'd love to understand your needs and provide tailored products and services for your business." data-zh="我们很乐意了解您的需要，为您度身订造适合的产品和服务。">We'd love to understand your needs and provide tailored products and services for your business.</p>
+            <a href="../contact/" class="btn btn-white" data-en="Request a Quote" data-zh="索取报价">Request a Quote</a>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <span class="ucp">Wah Tat</span><span class="group">GROUP</span>
+                    </div>
+                    <p data-en="Bringing more than 46 years of craftsmanship and innovation to the artificial botanical industry. Premium quality, sustainably made." data-zh="将超过46年的工艺和创新带入人造植物行业。优质品质，可持续发展。">
+                        Bringing more than 46 years of craftsmanship and innovation to the artificial botanical industry. Premium quality, sustainably made.
+                    </p>
+                </div>
+                <div>
+                    <h4 data-en="Quick Links" data-zh="快速链接">Quick Links</h4>
+                    <ul class="footer__links">
+                        <li><a href="../about/" data-en="About Us" data-zh="关于我们">About Us</a></li>
+                        <li><a href="../about/history.html" data-en="History &amp; Milestones" data-zh="历史与里程碑">History &amp; Milestones</a></li>
+                        <li><a href="./" data-en="Products &amp; Services" data-zh="产品与服务">Products &amp; Services</a></li>
+                        <li><a href="../sustainability/" data-en="Sustainability" data-zh="可持续发展">Sustainability</a></li>
+                        <li><a href="#" data-en="Careers" data-zh="加入我们">Careers</a></li>
+                        <li><a href="../contact/" data-en="Contact Us" data-zh="联系我们">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-en="Resources" data-zh="资源">Resources</h4>
+                    <ul class="footer__links">
+                        <li><a href="#" data-en="Newsroom" data-zh="新闻室">Newsroom</a></li>
+                        <li><a href="#" data-en="Global Footprint" data-zh="全球足迹">Global Footprint</a></li>
+                        <li><a href="#" data-en="Social Contribution" data-zh="社会贡献">Social Contribution</a></li>
+                        <li><a href="#" data-en="Privacy Policy" data-zh="隐私政策">Privacy Policy</a></li>
+                        <li><a href="#" data-en="Terms of Use" data-zh="使用条款">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 data-en="Contact" data-zh="联系我们">Contact</h4>
+                    <div class="footer__address">
+                        <strong data-en="Hong Kong" data-zh="香港">Hong Kong</strong>
+                        Kwai Chung<br>
+                        4/F, Fabrico Industrial Building<br>
+                        78 Kwai Cheong Rd<br>
+                        Kwai Chung<br>
+                        Hong Kong<br>
+                        Phone: 852 24265541 (Head office)<br>
+                        Email: enquiry@wahtatltd.com
+                        <strong data-en="China" data-zh="中国">China</strong>
+                        GUANGDONG PROVINCE<br>
+                        NO. 3, JINLING Road<br>
+                        TANGXIA Town<br>
+                        PENGJIANG District<br>
+                        JIANGMEN City<br>
+                        GUANGDONG Province
+                    </div>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2026 Wah Tat Plant. All rights reserved.</p>
+                <div class="footer__social">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        const langBtn = document.querySelector('.header__lang');
+        let currentLang = localStorage.getItem('ucp-lang') || 'en';
+        function applyLang(lang) {
+            currentLang = lang;
+            langBtn.innerHTML = currentLang === 'en'
+                ? '<i class="fas fa-globe"></i> EN <i class="fas fa-chevron-down" style="font-size:10px"></i>'
+                : '<i class="fas fa-globe"></i> 中文 <i class="fas fa-chevron-down" style="font-size:10px"></i>';
+            document.querySelectorAll('[data-en][data-zh]').forEach(el => {
+                const newText = el.getAttribute(`data-${currentLang}`);
+                if (el.children.length === 0) el.textContent = newText;
+                else for (const node of el.childNodes) { if (node.nodeType === Node.TEXT_NODE) { node.textContent = newText; break; } }
+            });
+                        document.querySelectorAll('[data-en-html][data-zh-html]').forEach(el => {
+                el.innerHTML = el.getAttribute(`data-${currentLang}-html`);
+            });
+
+            localStorage.setItem('ucp-lang', currentLang);
+        }
+        if (currentLang === 'zh') applyLang('zh');
+        langBtn.addEventListener('click', () => { applyLang(currentLang === 'en' ? 'zh' : 'en'); });
+
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mainNav = document.getElementById('mainNav');
+        mobileToggle.addEventListener('click', () => { mobileToggle.classList.toggle('active'); mainNav.classList.toggle('open'); });
+        document.querySelectorAll('.nav__link').forEach(link => { link.addEventListener('click', (e) => { if (window.innerWidth <= 768) { const dropdown = link.parentElement.querySelector('.nav__dropdown'); if (dropdown) { e.preventDefault(); link.parentElement.classList.toggle('open'); } } }); });
+
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => { if (window.pageYOffset > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled'); });
+
+        const searchBtn = document.getElementById('searchBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+        const searchClose = document.getElementById('searchClose');
+        searchBtn.addEventListener('click', () => { searchOverlay.classList.add('active'); searchOverlay.querySelector('input').focus(); });
+        searchClose.addEventListener('click', () => { searchOverlay.classList.remove('active'); });
+        searchOverlay.addEventListener('click', (e) => { if (e.target === searchOverlay) searchOverlay.classList.remove('active'); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') searchOverlay.classList.remove('active'); });
+    </script>
+</body>
+</html>
