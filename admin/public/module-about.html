@@ -38,6 +38,15 @@
         </div>
     </div>
 
+    <div class="card" style="margin-bottom:20px;">
+        <div class="card__header"><h3 data-en="Select Page" data-zh="选择页面">Select Page</h3></div>
+        <div style="display:flex;gap:12px;align-items:center;">
+            <select id="pageSelector" onchange="onPageChange()" style="padding:10px 14px;border:2px solid var(--admin-border);border-radius:var(--radius);font-size:14px;font-family:var(--font);outline:none;min-width:280px;">
+                    <option value="index">Corporate Overview / 企业概况</option>
+                    <option value="history">History &amp; Milestones / 历史与里程碑</option>
+            </select>
+        </div>
+    </div>
 
     <div class="card">
         <div class="card__header">
@@ -81,6 +90,10 @@
 <script>
 var MODULE = 'about';
 var currentPage = 'index';
+const PAGES = {
+    "index": { en: "Corporate Overview", zh: "企业概况" },
+    "history": { en: "History & Milestones", zh: "历史与里程碑" }
+};
 
 (async function() {
     if (!await checkAuth()) return;
