@@ -495,42 +495,72 @@
         .product-card:hover .product-card__img {
             transform: scale(1.05);
         }
-        .product-card__overlay {
+        .product-card__text {
             position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.7) 0%,
-                rgba(0, 0, 0, 0.1) 50%,
-                transparent 100%
-            );
+            top: 24px;
+            left: 24px;
+            right: 24px;
+            color: #fff;
+        }
+        .product-card__label {
+            margin: 0 0 7px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
+        }
+        .product-card__title {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 1.5;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
         }
         .product-card__content {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 32px 28px;
+            bottom: 24px;
+            right: 24px;
             color: #fff;
-        }
-        .product-card__title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 6px;
         }
         .product-card__arrow {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-size: 13px;
-            font-weight: 600;
+            gap: 8px;
+            padding: 11px 22px;
+            border: 1.5px solid rgba(255, 255, 255, 0.9);
+            border-radius: 50px;
+            background: rgba(0, 0, 0, 0.22);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.9);
-            margin-top: 8px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
             transition: var(--transition);
         }
-        .product-card:hover .product-card__arrow { gap: 12px; }
+        .product-card:hover .product-card__arrow {
+            background: var(--color-magenta);
+            border-color: var(--color-magenta);
+            gap: 14px;
+        }
+        .product-card__main { position: absolute; inset: 0; display: block; z-index: 1; }
+        .product-card__fest { position: absolute; right: 24px; bottom: 24px; z-index: 2; display: flex; flex-direction: row; gap: 10px; }
+        .product-card--holiday .product-card__content { display: none; }
+        .product-card__fest-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 10px 16px; border: 1.5px solid rgba(255, 255, 255, 0.9); border-radius: 50px;
+            background: rgba(0, 0, 0, 0.35); color: #fff; font-size: 12px; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+            transition: var(--transition); cursor: pointer;
+        }
+        .product-card__fest-btn:hover {
+            background: var(--color-magenta);
+            border-color: var(--color-magenta);
+            transform: translateY(-2px);
+            gap: 10px;
+        }
 
         /* ===== GLOBAL REACH ===== */
         .global-reach {
@@ -1028,6 +1058,7 @@
             .header__actions { display: none; }
 
             .products-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+            .product-card__fest { right: 16px; bottom: 16px; gap: 8px; }
             .split { grid-template-columns: 1fr; gap: 30px; }
             .global-reach__stats { grid-template-columns: 1fr; }
             .impact__grid { grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -1074,10 +1105,6 @@
             font-size: clamp(32px, 5vw, 52px);
             font-weight: 600;
             letter-spacing: -0.5px;
-        }
-        .products-grid a.product-card {
-            display: block;
-            display: block;
         }
         @media (max-width: 768px) {
             .page-banner { height: 280px; }
@@ -1194,29 +1221,41 @@
 
             <div class="products-grid">
                 <a href="floral-plants.html" class="product-card">
-                    <img class="product-card__img" src="../image/site-images/ucp/UPC-Products-Services-Category-1.png" alt="Floral, Plants &amp; Greeneries" loading="lazy">
-                    <div class="product-card__overlay"></div>
+                    <img class="product-card__img" src="../image/home-material/home-products-material/productsone.jpg" alt="Spring Collection" loading="lazy">
+                    <div class="product-card__text">
+                        <p class="product-card__label" data-en="Spring Collection" data-zh="春季系列">Spring Collection</p>
+                        <h3 class="product-card__title" data-en="Fresh Blossoms &amp; Delicate Greenery" data-zh="清新花材与细腻绿植">Fresh Blossoms &amp; Delicate Greenery</h3>
+                    </div>
                     <div class="product-card__content">
-                        <h3 class="product-card__title" data-en="Floral, Plants &amp; Greeneries" data-zh="仿真花卉、植物与绿色植物">Floral, Plants &amp; Greeneries</h3>
-                        <span class="product-card__arrow" data-en="Learn More" data-zh="了解更多">Learn More <i class="fas fa-arrow-right"></i></span>
+                        <span class="product-card__arrow" data-en="Explore Spring" data-zh="探索春季系列">Explore Spring <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
                 <a href="home-decor.html" class="product-card">
-                    <img class="product-card__img" src="../image/site-images/ucp/UPC-Products-Services-Category-2.jpg" alt="Home Decor Accents" loading="lazy">
-                    <div class="product-card__overlay"></div>
+                    <img class="product-card__img" src="../image/home-material/home-products-material/productstwo.jpg" alt="Autumn Collection" loading="lazy">
+                    <div class="product-card__text">
+                        <p class="product-card__label" data-en="Autumn Collection" data-zh="秋季系列">Autumn Collection</p>
+                        <h3 class="product-card__title" data-en="Rich Hues &amp; Textured Foliage" data-zh="浓郁色彩与质感叶材">Rich Hues &amp; Textured Foliage</h3>
+                    </div>
                     <div class="product-card__content">
-                        <h3 class="product-card__title" data-en="Home Decor Accents" data-zh="家居装饰品">Home Decor Accents</h3>
-                        <span class="product-card__arrow" data-en="Learn More" data-zh="了解更多">Learn More <i class="fas fa-arrow-right"></i></span>
+                        <span class="product-card__arrow" data-en="Explore Autumn" data-zh="探索秋季系列">Explore Autumn <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
-                <a href="seasonal-festive.html" class="product-card">
-                    <img class="product-card__img" src="../image/site-images/ucp/UPC-Products-Services-Category-3.jpg" alt="Seasonal &amp; Festive Decor" loading="lazy">
-                    <div class="product-card__overlay"></div>
-                    <div class="product-card__content">
-                        <h3 class="product-card__title" data-en="Seasonal &amp; Festive Decor" data-zh="季节性与节庆家居装饰品">Seasonal &amp; Festive Decor</h3>
-                        <span class="product-card__arrow" data-en="Learn More" data-zh="了解更多">Learn More <i class="fas fa-arrow-right"></i></span>
+                <div class="product-card product-card--holiday">
+                    <a href="seasonal-festive.html" class="product-card__main" aria-label="Holiday Collection">
+                        <img class="product-card__img" src="../image/home-material/home-products-material/productsthree.jpg" alt="Holiday Collection" loading="lazy">
+                        <div class="product-card__text">
+                            <p class="product-card__label" data-en="Holiday Collection" data-zh="节日系列">Holiday Collection</p>
+                            <h3 class="product-card__title" data-en="Halloween &amp; Christmas Florals" data-zh="万圣节与圣诞节花艺">Halloween &amp; Christmas Florals</h3>
+                        </div>
+                        <div class="product-card__content">
+                            <span class="product-card__arrow" data-en="Explore Holidays" data-zh="探索节日系列">Explore Holidays <i class="fas fa-arrow-right"></i></span>
+                        </div>
+                    </a>
+                    <div class="product-card__fest">
+                        <a href="halloween.html" class="product-card__fest-btn" data-en="🎃 Halloween" data-zh="🎃 万圣节">🎃 Halloween <i class="fas fa-arrow-right"></i></a>
+                        <a href="christmas.html" class="product-card__fest-btn" data-en="🎄 Christmas" data-zh="🎄 圣诞">🎄 Christmas <i class="fas fa-arrow-right"></i></a>
                     </div>
-                </a>
+                </div>
             </div>
         </div>
     </section>
