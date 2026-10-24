@@ -965,10 +965,10 @@
         }
         .search-overlay__close:hover { color: var(--color-magenta); }
 
-        /* ===== SPRING HERO BANNER（按用户提供 CSS：min-height 650px、左对齐垂直居中） ===== */
+        /* ===== SPRING HERO BANNER（宽度铺满屏幕，高度按背景图原始比例自适应） ===== */
         .hero-banner {
             width: 100%;
-            min-height: 650px;
+            aspect-ratio: 2048 / 936;
             background-color: #F8F7F2;
             background-image: url('../image/products/spring/spring_banner.png');
             background-position: center center;
@@ -1042,6 +1042,7 @@
         }
         @media (max-width: 768px) {
             .hero-banner {
+                aspect-ratio: auto;
                 min-height: 520px;
                 padding-left: 5%;
             }
