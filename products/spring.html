@@ -965,12 +965,13 @@
         }
         .search-overlay__close:hover { color: var(--color-magenta); }
 
-        /* ===== SPRING HERO BANNER（整张背景图完整显示、不裁切；宽度铺满，高度自适应并限制在首屏内） ===== */
+        /* ===== SPRING HERO BANNER（整张背景图完整显示、不裁切；宽度铺满，高度自适应并限制在首屏内；底部留白避免页脚紧贴） ===== */
         .hero-banner {
             position: relative;
             width: 100%;
             aspect-ratio: 2048 / 936;
             max-height: calc(100vh - 80px);
+            margin-bottom: 80px;
             background-color: #F8F7F2;
             background-image: url('../image/products/spring/spring_banner.png');
             background-position: center center;
@@ -1019,6 +1020,7 @@
             .hero-banner {
                 aspect-ratio: auto;
                 min-height: 520px;
+                margin-bottom: 48px;
             }
             .hero-btn-group {
                 top: auto;
