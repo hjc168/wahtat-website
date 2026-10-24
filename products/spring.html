@@ -965,11 +965,14 @@
         }
         .search-overlay__close:hover { color: var(--color-magenta); }
 
-        /* ===== SPRING HERO BANNER（文字已内嵌于背景图，背景透明，图片按原始比例完整显示） ===== */
+        /* ===== SPRING HERO BANNER（顶部取景：保留内嵌文字、裁去底部留白，避免与页脚粘连） ===== */
         .spring-hero__photo {
             width: 100%;
-            aspect-ratio: 2048 / 936;
-            background: url('../image/products/spring/spring_banner.png') center/cover no-repeat;
+            aspect-ratio: 2278 / 600;
+            background: url('../image/products/spring/spring_banner.png') center top / cover no-repeat;
+        }
+        @media (max-width: 768px) {
+            .spring-hero__photo { aspect-ratio: 2048 / 936; }
         }
 
         /* ===== RESPONSIVE ===== */
