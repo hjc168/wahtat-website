@@ -965,52 +965,19 @@
         }
         .search-overlay__close:hover { color: var(--color-magenta); }
 
-        /* ===== SPRING HERO BANNER（16:9 通栏首屏；文字左侧垂直居中；双按钮豆沙绿） ===== */
+        /* ===== SPRING HERO BANNER（16:9 通栏；背景用内嵌文字图，左对齐取景不裁字；按钮叠于图内文字下方） ===== */
         .spring-hero {
             position: relative;
-            display: flex;
-            align-items: center;
             width: 100%;
             aspect-ratio: 16 / 9;
             overflow: hidden;
-            background: url('../image/products/spring/spring_banner.png') center/cover no-repeat;
-        }
-        .spring-hero__content {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            padding-left: 8%;
-            padding-right: 8%;
-            text-align: left;
-        }
-        .spring-hero__title {
-            margin: 0 0 20px;
-            font-family: var(--font-sans);
-            font-size: clamp(34px, 4.5vw, 72px);
-            font-weight: 700;
-            line-height: 1.12;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #223022;
-        }
-        .spring-hero__title span { display: block; }
-        .spring-hero__sub {
-            margin: 0 0 12px;
-            font-family: var(--font-sans);
-            font-size: clamp(16px, 1.6vw, 22px);
-            font-weight: 500;
-            line-height: 1.45;
-            color: #334233;
-        }
-        .spring-hero__desc {
-            margin: 0 0 30px;
-            font-family: var(--font-sans);
-            font-size: clamp(14px, 1.2vw, 17px);
-            line-height: 1.7;
-            max-width: 520px;
-            color: #445444;
+            background: url('../image/products/spring/spring_banner.png') left center / auto 100% no-repeat;
         }
         .spring-hero__actions {
+            position: absolute;
+            top: 52%;
+            left: 8%;
+            z-index: 1;
             display: flex;
             align-items: center;
             gap: 18px;
@@ -1050,11 +1017,8 @@
         }
         @media (max-width: 768px) {
             .spring-hero { min-height: 340px; }
-            .spring-hero__title { font-size: 28px; }
-            .spring-hero__sub { font-size: 14px; }
-            .spring-hero__desc { font-size: 13px; margin-bottom: 22px; }
             .btn-spring { padding: 11px 24px; font-size: 14px; }
-            .spring-hero__actions { gap: 12px; }
+            .spring-hero__actions { gap: 12px; top: 48%; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1287,19 +1251,11 @@
 
     
 
-    <!-- ===== SPRING HERO BANNER（16:9 通栏首屏：文字左侧垂直居中 + 豆沙绿双按钮） ===== -->
+    <!-- ===== SPRING HERO BANNER（背景为内嵌文字图；文字已在图中，仅叠加双按钮） ===== -->
     <section class="spring-hero">
-        <div class="spring-hero__content">
-            <h1 class="spring-hero__title">
-                <span data-en="SPRING GREENERY" data-zh="春季绿意">SPRING GREENERY</span>
-                <span data-en="COLLECTION" data-zh="系列">COLLECTION</span>
-            </h1>
-            <p class="spring-hero__sub" data-en="Artificial Plants &amp; Spring Flowers for Wholesale" data-zh="仿真植物与春季花卉，批发供应">Artificial Plants &amp; Spring Flowers for Wholesale</p>
-            <p class="spring-hero__desc" data-en="Factory-made greenery, bushes, vines and floral stems for commercial decor" data-zh="工厂制造的人造绿植、灌木、藤蔓与花枝，适用于商业装饰">Factory-made greenery, bushes, vines and floral stems for commercial decor</p>
-            <div class="spring-hero__actions">
-                <a href="#" class="btn-spring btn-spring--primary" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</a>
-                <a href="../contact/" class="btn-spring btn-spring--outline" data-en="Contact Sales" data-zh="联系销售">Contact Sales</a>
-            </div>
+        <div class="spring-hero__actions">
+            <a href="#" class="btn-spring btn-spring--primary" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</a>
+            <a href="../contact/" class="btn-spring btn-spring--outline" data-en="Contact Sales" data-zh="联系销售">Contact Sales</a>
         </div>
     </section>
 
