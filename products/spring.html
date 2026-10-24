@@ -44,7 +44,7 @@
         body {
             font-family: var(--font-sans);
             color: var(--color-text);
-            background: var(--color-white);
+            background: #FCFCFB;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -965,48 +965,51 @@
         }
         .search-overlay__close:hover { color: var(--color-magenta); }
 
-        /* ===== SPRING HERO BANNER ===== */
-        .spring-hero {
-            position: relative;
-            display: flex;
-            align-items: center;
+        /* ===== SPRING HERO BANNER（与圣诞页同款：宽幅照片 2278:560 + 渐入文字带） ===== */
+        .spring-hero__photo {
             width: 100%;
-            aspect-ratio: 2048 / 1152;
-            max-height: 72vh;
-            overflow: hidden;
+            aspect-ratio: 2278 / 560;
             background: url('../image/products/spring/spring_banner.png') center/cover no-repeat;
         }
+        .spring-hero__band {
+            margin-top: -90px;
+            background: linear-gradient(180deg, rgba(252, 252, 251, 0) 0%, rgba(252, 252, 251, 0) 30px, #FCFCFB 150px);
+            padding: 150px 0 64px;
+        }
         .spring-hero__content {
-            width: 100%;
             padding-left: 8%;
             padding-right: 8%;
         }
         .spring-hero__title {
-            margin: 0 0 22px;
+            margin: 0 0 20px;
             font-family: var(--font-sans);
-            font-size: clamp(30px, 5.5vw, 78px);
+            font-size: clamp(28px, 4.5vw, 60px);
             font-weight: 700;
-            line-height: 1.08;
+            line-height: 1.12;
             letter-spacing: 3px;
             text-transform: uppercase;
             color: #223022;
         }
         .spring-hero__title span { display: block; }
         .spring-hero__sub {
-            margin: 0 0 14px;
+            margin: 0 0 12px;
             font-family: var(--font-sans);
-            font-size: clamp(17px, 2vw, 28px);
+            font-size: clamp(16px, 1.8vw, 24px);
             font-weight: 500;
-            line-height: 1.4;
+            line-height: 1.45;
             color: #334233;
         }
         .spring-hero__desc {
             margin: 0;
             font-family: var(--font-sans);
-            font-size: clamp(14px, 1.3vw, 18px);
+            font-size: clamp(14px, 1.2vw, 17px);
             line-height: 1.75;
             max-width: 620px;
             color: #445444;
+        }
+        @media (max-width: 768px) {
+            .spring-hero__band { margin-top: -44px; padding: 88px 0 44px; background: linear-gradient(180deg, rgba(252, 252, 251, 0) 0%, rgba(252, 252, 251, 0) 16px, #FCFCFB 96px); }
+            .spring-hero__content { padding-left: 6%; padding-right: 6%; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1184,7 +1187,6 @@
                         <a href="./" class="nav__link" data-en="Products" data-zh="产品">Products <i class="fas fa-chevron-down"></i></a>
                         <div class="nav__dropdown">
                             <a href="./spring.html" data-en="Spring Collection" data-zh="春季系列">Spring Collection</a>
-                            <a href="./floral-plants.html" data-en="Floral, Plants &amp; Greeneries" data-zh="仿真花卉、植物与绿色植物">Floral, Plants &amp; Greeneries</a>
                             <a href="./home-decor.html" data-en="Home Décor Accents" data-zh="家居装饰精品">Home Décor Accents</a>
                             <a href="./halloween.html" data-en="Halloween Collection" data-zh="万圣节系列">Halloween Collection</a>
                             <a href="./christmas.html" data-en="Christmas Collection" data-zh="圣诞系列">Christmas Collection</a>
@@ -1240,15 +1242,18 @@
 
     
 
-    <!-- ===== SPRING HERO BANNER（背景图 + 左对齐文字组） ===== -->
+    <!-- ===== SPRING HERO BANNER（与圣诞页同款：宽幅照片 + 渐入文字带） ===== -->
     <section class="spring-hero">
-        <div class="spring-hero__content">
-            <h1 class="spring-hero__title">
-                <span data-en="SPRING GREENERY" data-zh="春季绿意">SPRING GREENERY</span>
-                <span data-en="COLLECTION" data-zh="系列">COLLECTION</span>
-            </h1>
-            <p class="spring-hero__sub" data-en="Artificial Plants &amp; Spring Flowers for Wholesale" data-zh="仿真植物与春季花卉，批发供应">Artificial Plants &amp; Spring Flowers for Wholesale</p>
-            <p class="spring-hero__desc" data-en="Factory-made greenery, bushes, vines and floral stems for commercial decor" data-zh="工厂制造的人造绿植、灌木、藤蔓与花枝，适用于商业装饰">Factory-made greenery, bushes, vines and floral stems for commercial decor</p>
+        <div class="spring-hero__photo"></div>
+        <div class="spring-hero__band">
+            <div class="spring-hero__content">
+                <h1 class="spring-hero__title">
+                    <span data-en="SPRING GREENERY" data-zh="春季绿意">SPRING GREENERY</span>
+                    <span data-en="COLLECTION" data-zh="系列">COLLECTION</span>
+                </h1>
+                <p class="spring-hero__sub" data-en="Artificial Plants &amp; Spring Flowers for Wholesale" data-zh="仿真植物与春季花卉，批发供应">Artificial Plants &amp; Spring Flowers for Wholesale</p>
+                <p class="spring-hero__desc" data-en="Factory-made greenery, bushes, vines and floral stems for commercial decor" data-zh="工厂制造的人造绿植、灌木、藤蔓与花枝，适用于商业装饰">Factory-made greenery, bushes, vines and floral stems for commercial decor</p>
+            </div>
         </div>
     </section>
 
