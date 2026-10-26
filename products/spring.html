@@ -1013,7 +1013,7 @@
         }
         .hero-btn-group {
             display: flex;
-            gap: 22px;
+            gap: 18px;
         }
         .hero-btn-group .btn-primary {
             font-family: "Inter", sans-serif;
@@ -1060,6 +1060,63 @@
             .hero-btn-group { flex-direction: column; }
             .hero-btn-group .btn-primary,
             .hero-btn-group .btn-outline { width: 100%; text-align: center; }
+        }
+
+        /* ===== SPRING CATEGORIES（Banner 下方产品分类卡片区，按用户提供 CSS） ===== */
+        .spring-categories {
+            background-color: #f7efe5;
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        .spring-categories .section-title {
+            text-align: center;
+            font-size: 42px;
+            color: #222222;
+            margin: 0 0 12px;
+            font-weight: 600;
+        }
+        .spring-categories .section-desc {
+            text-align: center;
+            font-size: 18px;
+            color: #444444;
+            margin: 0 0 48px;
+        }
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .category-card {
+            background: #fff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .card-img-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .card-label {
+            padding: 18px 12px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 500;
+            color: #111;
+            background-color: #f9efe4;
+        }
+        @media (max-width: 1024px) {
+            .category-grid { grid-template-columns: repeat(2, 1fr); }
+            .spring-categories .section-title { font-size: 32px; }
+        }
+        @media (max-width: 640px) {
+            .category-grid { grid-template-columns: 1fr; }
+            .spring-categories { padding: 40px 16px; }
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1307,6 +1364,40 @@
             <div class="hero-btn-group">
                 <a href="#" class="btn-primary" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</a>
                 <a href="../contact/" class="btn-outline" data-en="Contact Sales" data-zh="联系销售">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SPRING CATEGORIES（产品分类卡片区，按用户提供 HTML） ===== -->
+    <section class="spring-categories">
+        <div class="container">
+            <h2 class="section-title" data-en="Spring Categories" data-zh="春季分类">Spring Categories</h2>
+            <p class="section-desc" data-en="Artificial greenery, flowers, vines and bushes for bulk orders" data-zh="人造绿植、花卉、藤蔓与灌木，批量订购">Artificial greenery, flowers, vines and bushes for bulk orders</p>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/product_card%20(1).jpg" alt="Greenery Bushes" loading="lazy">
+                    </div>
+                    <div class="card-label" data-en="Greenery Bushes" data-zh="绿植灌木">Greenery Bushes</div>
+                </div>
+                <div class="category-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/product_card%20(2).jpg" alt="Vines &amp; Hanging Plants" loading="lazy">
+                    </div>
+                    <div class="card-label" data-en="Vines &amp; Hanging Plants" data-zh="藤蔓与垂吊植物">Vines &amp; Hanging Plants</div>
+                </div>
+                <div class="category-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/product_card%20(3).jpg" alt="Spring Flowers" loading="lazy">
+                    </div>
+                    <div class="card-label" data-en="Spring Flowers" data-zh="春季花卉">Spring Flowers</div>
+                </div>
+                <div class="category-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/product_card%20(4).jpg" alt="Greenery &amp; Flower Kits" loading="lazy">
+                    </div>
+                    <div class="card-label" data-en="Greenery &amp; Flower Kits" data-zh="绿植与花卉套装">Greenery &amp; Flower Kits</div>
+                </div>
             </div>
         </div>
     </section>
