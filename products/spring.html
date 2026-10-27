@@ -1123,7 +1123,8 @@
 
         /* ===== FEATURED GREENERY（精选绿植商品区，按用户提供 CSS） ===== */
         .spring-categories .container,
-        .featured-greenery .container {
+        .featured-greenery .container,
+        .spring-flower-stems .container {
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -1204,13 +1205,93 @@
             .featured-greenery { padding: 40px 16px; }
         }
 
-        /* ===== 卡片悬停上浮动画（分类卡 + 精选商品卡） ===== */
+        /* ===== SPRING FLOWER STEMS（春季花枝区，按用户提供 CSS，样式作用域限定在花卡内） ===== */
+        .spring-flower-stems {
+            background-color: #f7efe5;
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        .spring-flower-stems .section-title {
+            text-align: center;
+            font-size: 42px;
+            color: #222222;
+            margin: 0 0 12px;
+            font-weight: 600;
+        }
+        .spring-flower-stems .section-desc {
+            text-align: center;
+            font-size: 18px;
+            color: #444444;
+            margin: 0 0 48px;
+        }
+        .flower-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .flower-card {
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .flower-card .card-info {
+            padding: 16px 18px 20px;
+        }
+        .flower-card .card-name {
+            font-size: 17px;
+            font-weight: 500;
+            color: #222;
+            margin: 0 0 10px;
+        }
+        .flower-card .tag {
+            display: inline-block;
+            background: #d9c8b4;
+            color: #333;
+            font-size: 13px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+        .flower-card .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .flower-card .spec {
+            font-size: 15px;
+            color: #555;
+        }
+        .flower-card .btn-detail {
+            background-color: #d9c8b4;
+            color: #222;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .flower-card .btn-detail:hover {
+            background-color: #c7b49d;
+        }
+        @media (max-width: 1024px) {
+            .flower-grid { grid-template-columns: repeat(2, 1fr); }
+            .spring-flower-stems .section-title { font-size: 32px; }
+        }
+        @media (max-width: 640px) {
+            .flower-grid { grid-template-columns: 1fr; }
+            .spring-flower-stems { padding: 40px 16px; }
+        }
+
+        /* ===== 卡片悬停上浮动画（分类卡 + 精选商品卡 + 春季花枝卡） ===== */
         .category-card,
-        .greenery-card {
+        .greenery-card,
+        .flower-card {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .category-card:hover,
-        .greenery-card:hover {
+        .greenery-card:hover,
+        .flower-card:hover {
             transform: translateY(-6px);
             box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
         }
@@ -1602,6 +1683,120 @@
                     <div class="card-info">
                         <h3 class="card-name" data-en="Green Leaf Bouquet" data-zh="绿叶花束">Green Leaf Bouquet</h3>
                         <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SPRING FLOWER STEMS（春季花枝区，按用户提供 HTML） ===== -->
+    <section class="spring-flower-stems">
+        <div class="container">
+            <h2 class="section-title" data-en="Spring Flower Stems" data-zh="春季花枝">Spring Flower Stems</h2>
+            <p class="section-desc" data-en="Artificial tulips, peonies, hydrangeas and floral branches for seasonal decor" data-zh="仿真郁金香、洋牡丹、绣球与花枝，用于季节装饰">Artificial tulips, peonies, hydrangeas and floral branches for seasonal decor</p>
+            <div class="flower-grid">
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS1.jpg" alt="Artificial Tulip Stems" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Tulip Stems" data-zh="郁金香花枝">Tulip Stems</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS2.jpg" alt="Artificial Ranunculus" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Ranunculus" data-zh="洋牡丹">Ranunculus</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS3.jpg" alt="Artificial Hydrangea" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Hydrangea" data-zh="绣球">Hydrangea</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS4.jpg" alt="Artificial Daisy" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Daisy" data-zh="小雏菊">Daisy</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS5.jpg" alt="Pink Cherry Blossom Branch" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Pink Cherry Blossom" data-zh="粉色樱花枝">Pink Cherry Blossom</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS6.jpg" alt="Mixed Spring Bouquet" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Mixed Spring Bouquet" data-zh="混合春日花束">Mixed Spring Bouquet</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS7.jpg" alt="Peach Blossom Branch" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Peach Blossom" data-zh="桃花枝">Peach Blossom</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flower-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/SFS8.jpg" alt="White Blossom Branch" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="White Blossom" data-zh="白色梨花枝">White Blossom</h3>
+                        <span class="tag" data-en="Spring Collection" data-zh="春季系列">Spring Collection</span>
                         <div class="card-bottom">
                             <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
                             <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
