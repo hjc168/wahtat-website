@@ -1026,53 +1026,26 @@
             display: flex;
             gap: 18px;
         }
-        .hero-btn-group .btn-primary {
-            position: relative;
-            overflow: hidden;
-            font-family: "Inter", sans-serif;
-            font-size: 16px;
-            padding: 14px 32px;
-            background-color: #789477;
-            color: #ffffff;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-        }
-        .hero-btn-group .btn-primary::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle 90px at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
-            opacity: 0;
-            transition: opacity 0.25s ease;
-            pointer-events: none;
-        }
-        .hero-btn-group .btn-primary:hover {
-            background-color: #647d63;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(143, 188, 148, 0.5);
-        }
-        .hero-btn-group .btn-primary:hover::before {
-            opacity: 1;
-        }
-        .hero-btn-group .btn-primary .btn-primary__label {
-            position: relative;
-            z-index: 1;
-        }
+        .hero-btn-group .btn-primary,
         .hero-btn-group .btn-outline {
             font-family: "Inter", sans-serif;
             font-size: 16px;
             padding: 14px 32px;
-            background: transparent;
-            color: #445444;
             border: 1px solid #789477;
             border-radius: 12px;
             cursor: pointer;
+            background: transparent;
+            color: #445444;
             transition: all 0.25s ease;
         }
-        .hero-btn-group .btn-outline:hover {
-            background-color: rgba(120, 148, 119, 0.1);
+        .hero-btn-group .is-green {
+            background-color: #789477;
+            color: #ffffff;
+        }
+        .hero-btn-group .is-green:hover {
+            background-color: #647d63;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(143, 188, 148, 0.5);
         }
         @media (max-width: 768px) {
             .hero-banner {
@@ -1485,7 +1458,7 @@
                 <span data-en="for commercial decor" data-zh="适用于商业装饰">for commercial decor</span>
             </p>
             <div class="hero-btn-group">
-                <a href="#spring-categories" class="btn-primary"><span class="btn-primary__label" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</span></a>
+                <a href="#spring-categories" class="btn-primary is-green"><span data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</span></a>
                 <a href="../contact/" class="btn-outline" data-en="Contact Sales" data-zh="联系销售">Contact Sales</a>
             </div>
         </div>
@@ -1864,14 +1837,21 @@
             observer.observe(el);
         });
 
-        // Banner 主按钮：悬停时背景高光跟随鼠标移动
-        document.querySelectorAll('.hero-btn-group .btn-primary').forEach(btn => {
-            btn.addEventListener('mousemove', e => {
-                const r = btn.getBoundingClientRect();
-                btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-                btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        // Banner 双按钮：悬停哪个按钮，绿色背景就切换到哪个按钮
+        const heroBtnGroup = document.querySelector('.hero-btn-group');
+        if (heroBtnGroup) {
+            const heroBtns = heroBtnGroup.querySelectorAll('a');
+            heroBtns.forEach(btn => {
+                btn.addEventListener('mouseenter', () => {
+                    heroBtns.forEach(b => b.classList.remove('is-green'));
+                    btn.classList.add('is-green');
+                });
             });
-        });
+            heroBtnGroup.addEventListener('mouseleave', () => {
+                heroBtns.forEach(b => b.classList.remove('is-green'));
+                heroBtnGroup.querySelector('.btn-primary').classList.add('is-green');
+            });
+        }
     </script>
 
 
