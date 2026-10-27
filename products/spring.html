@@ -1786,7 +1786,7 @@
             if (e.key === 'Escape') searchOverlay.classList.remove('active');
         });
 
-        // --- Testimonial carousel ---
+        // --- Testimonial carousel（仅当页面存在轮播元素时启用，避免其他页面脚本中断） ---
         const track = document.getElementById('testimonialTrack');
         const prevBtn = document.getElementById('testimonialPrev');
         const nextBtn = document.getElementById('testimonialNext');
@@ -1794,15 +1794,6 @@
         const cards = document.querySelectorAll('.testimonial-card');
         let currentSlide = 0;
         const totalSlides = cards.length;
-
-        // Create dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('button');
-            dot.classList.add('testimonial-dot');
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
 
         function goToSlide(index) {
             currentSlide = (index + totalSlides) % totalSlides;
@@ -1812,11 +1803,22 @@
             });
         }
 
-        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        if (track && prevBtn && nextBtn && dotsContainer && totalSlides > 0) {
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('button');
+                dot.classList.add('testimonial-dot');
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
 
-        // Auto-play testimonials
-        setInterval(() => goToSlide(currentSlide + 1), 5000);
+            prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+            nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+            // Auto-play testimonials
+            setInterval(() => goToSlide(currentSlide + 1), 5000);
+        }
 
         // --- Intersection Observer for animations ---
         const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
