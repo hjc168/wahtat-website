@@ -798,25 +798,36 @@
             margin-top: 4px;
         }
 
-        /* ===== CTA BANNER ===== */
+        /* ===== CTA BANNER（与万圣节/圣诞页同款，渐变改为春日绿 #9FB69C → #F1F7EB） ===== */
         .cta-banner {
-            background: linear-gradient(135deg, var(--color-purple) 0%, #6c3fd4 50%, var(--color-magenta) 100%);
-            color: #fff;
+            background: linear-gradient(135deg, #9FB69C 0%, #F1F7EB 100%);
+            color: #223022;
             text-align: center;
             padding: 80px 0;
         }
         .cta-banner h2 {
             font-family: var(--font-serif);
             font-size: clamp(28px, 4vw, 40px);
+            color: #223022;
             margin-bottom: 16px;
         }
         .cta-banner p {
             font-size: 16px;
-            opacity: 0.85;
+            color: #445444;
             margin-bottom: 32px;
             max-width: 500px;
             margin-left: auto;
             margin-right: auto;
+        }
+        .cta-banner .btn-white {
+            background: #ffffff;
+            color: #223022;
+            border: 1px solid #9FB69C;
+        }
+        .cta-banner .btn-white:hover {
+            background: #223022;
+            color: #ffffff;
+            border-color: #223022;
         }
 
         /* ===== FOOTER ===== */
@@ -1897,6 +1908,15 @@
                     <div class="scenario-caption" data-en="Seasonal Floral Setup" data-zh="季节花艺布置">Seasonal Floral Setup</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- ===== INQUIRY CTA（欢迎定制订单，与万圣节/圣诞页同款） ===== -->
+    <section class="cta-banner">
+        <div class="container">
+            <h2 data-en="Custom Orders Welcome" data-zh="欢迎定制订单">Custom Orders Welcome</h2>
+            <p data-en="We'd love to understand your needs and provide tailored products and services for your business." data-zh="我们很乐意了解您的需要，为您度身订造适合的产品和服务。">We'd love to understand your needs and provide tailored products and services for your business.</p>
+            <a href="../contact/" class="btn btn-white" data-en="Request a Quote" data-zh="索取报价">Request a Quote</a>
         </div>
     </section>
 
