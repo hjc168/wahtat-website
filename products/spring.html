@@ -1027,6 +1027,8 @@
             gap: 18px;
         }
         .hero-btn-group .btn-primary {
+            position: relative;
+            overflow: hidden;
             font-family: "Inter", sans-serif;
             font-size: 16px;
             padding: 14px 32px;
@@ -1037,10 +1039,26 @@
             cursor: pointer;
             transition: all 0.25s ease;
         }
+        .hero-btn-group .btn-primary::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle 90px at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            pointer-events: none;
+        }
         .hero-btn-group .btn-primary:hover {
             background-color: #647d63;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(143, 188, 148, 0.5);
+        }
+        .hero-btn-group .btn-primary:hover::before {
+            opacity: 1;
+        }
+        .hero-btn-group .btn-primary .btn-primary__label {
+            position: relative;
+            z-index: 1;
         }
         .hero-btn-group .btn-outline {
             font-family: "Inter", sans-serif;
@@ -1211,6 +1229,17 @@
         @media (max-width: 640px) {
             .greenery-grid { grid-template-columns: 1fr; }
             .featured-greenery { padding: 40px 16px; }
+        }
+
+        /* ===== 卡片悬停上浮动画（分类卡 + 精选商品卡） ===== */
+        .category-card,
+        .greenery-card {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .category-card:hover,
+        .greenery-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.12);
         }
 
         /* ===== RESPONSIVE ===== */
@@ -1456,7 +1485,7 @@
                 <span data-en="for commercial decor" data-zh="适用于商业装饰">for commercial decor</span>
             </p>
             <div class="hero-btn-group">
-                <a href="#spring-categories" class="btn-primary" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</a>
+                <a href="#spring-categories" class="btn-primary"><span class="btn-primary__label" data-en="Explore Greenery" data-zh="探索绿植">Explore Greenery</span></a>
                 <a href="../contact/" class="btn-outline" data-en="Contact Sales" data-zh="联系销售">Contact Sales</a>
             </div>
         </div>
@@ -1833,6 +1862,15 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // Banner 主按钮：悬停时背景高光跟随鼠标移动
+        document.querySelectorAll('.hero-btn-group .btn-primary').forEach(btn => {
+            btn.addEventListener('mousemove', e => {
+                const r = btn.getBoundingClientRect();
+                btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+            });
         });
     </script>
 
