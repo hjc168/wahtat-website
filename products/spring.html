@@ -1129,6 +1129,89 @@
             .spring-categories { padding: 40px 16px; }
         }
 
+        /* ===== FEATURED GREENERY（精选绿植商品区，按用户提供 CSS） ===== */
+        .spring-categories .container,
+        .featured-greenery .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .featured-greenery {
+            background-color: #f7efe5;
+            padding: 60px 20px;
+            font-family: 'Inter', sans-serif;
+        }
+        .featured-greenery .section-title {
+            text-align: center;
+            font-size: 42px;
+            color: #222222;
+            margin: 0 0 12px;
+            font-weight: 600;
+        }
+        .featured-greenery .section-desc {
+            text-align: center;
+            font-size: 18px;
+            color: #444444;
+            margin: 0 0 48px;
+        }
+        .greenery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+        .greenery-card {
+            background: #ffffff;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+        .greenery-card .card-info {
+            padding: 16px 18px 20px;
+        }
+        .greenery-card .card-name {
+            font-size: 17px;
+            font-weight: 500;
+            color: #222;
+            margin: 0 0 10px;
+        }
+        .greenery-card .tag {
+            display: inline-block;
+            background: #81a88f;
+            color: #fff;
+            font-size: 13px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-bottom: 14px;
+        }
+        .greenery-card .card-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .greenery-card .spec {
+            font-size: 15px;
+            color: #555;
+        }
+        .greenery-card .btn-detail {
+            background-color: #81a88f;
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: background 0.2s ease;
+        }
+        .greenery-card .btn-detail:hover {
+            background-color: #6b8f78;
+        }
+        @media (max-width: 1024px) {
+            .greenery-grid { grid-template-columns: repeat(2, 1fr); }
+            .featured-greenery .section-title { font-size: 32px; }
+        }
+        @media (max-width: 640px) {
+            .greenery-grid { grid-template-columns: 1fr; }
+            .featured-greenery { padding: 40px 16px; }
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .container { padding: 0 24px; }
@@ -1407,6 +1490,120 @@
                         <img src="../image/products/spring/product_card%20(4).jpg" alt="Greenery &amp; Flower Kits" loading="lazy">
                     </div>
                     <div class="card-label" data-en="Greenery &amp; Flower Kits" data-zh="绿植与花卉套装">Greenery &amp; Flower Kits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED GREENERY（精选绿植商品区，按用户提供 HTML） ===== -->
+    <section class="featured-greenery">
+        <div class="container">
+            <h2 class="section-title" data-en="Featured Greenery" data-zh="精选绿植">Featured Greenery</h2>
+            <p class="section-desc" data-en="Best-selling artificial plants and greenery for wholesale supply" data-zh="畅销仿真植物与绿植，批发供应">Best-selling artificial plants and greenery for wholesale supply</p>
+            <div class="greenery-grid">
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG1.jpg" alt="Artificial Eucalyptus" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Eucalyptus" data-zh="尤加利">Eucalyptus</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG2.jpg" alt="Artificial Fern" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Fern" data-zh="蕨类">Fern</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG3.jpg" alt="Artificial Boxwood" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Boxwood" data-zh="黄杨">Boxwood</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG4.jpg" alt="Hanging Vine Plant" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Hanging Vine" data-zh="垂吊藤蔓">Hanging Vine</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG5.jpg" alt="Artificial Spathiphyllum" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Spathiphyllum" data-zh="白掌">Spathiphyllum</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG6.jpg" alt="Green Hydrangea" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Green Hydrangea" data-zh="绿绣球">Green Hydrangea</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG7.jpg" alt="Artificial Pampas Grass" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Pampas Grass" data-zh="蒲苇草">Pampas Grass</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="greenery-card">
+                    <div class="card-img-wrap">
+                        <img src="../image/products/spring/FG8.jpg" alt="Green Leaf Bouquet" loading="lazy">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-name" data-en="Green Leaf Bouquet" data-zh="绿叶花束">Green Leaf Bouquet</h3>
+                        <span class="tag" data-en="Wholesale Available" data-zh="可批发">Wholesale Available</span>
+                        <div class="card-bottom">
+                            <span class="spec" data-en="Size &amp; Material" data-zh="尺寸与材质">Size &amp; Material</span>
+                            <a href="#" class="btn-detail" data-en="View Detail" data-zh="查看详情">View Detail</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
