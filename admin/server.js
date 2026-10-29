@@ -271,7 +271,7 @@ const CONTENT_REGISTRY = {
             { key: 'ctaBtn', file: 'products/floral-plants.html', selector: '.cta-banner .btn', attr: 'data-en', zhAttr: 'data-zh', label: 'CTA Button' },
             { key: 'galleryNote', file: 'products/floral-plants.html', selector: '.section--cream .container > div:last-child p', attr: 'data-en', zhAttr: 'data-zh', label: 'Gallery Note' },
         ]},
-        'home-decor': { label: 'Home Décor Accents', labelZh: '家居装饰精品', items: [
+        'home-decor': { label: 'Autumn Collection', labelZh: '秋季系列', items: [
             { key: 'bannerBreadcrumb', file: 'products/home-decor.html', selector: '.page-banner__breadcrumb', attr: 'data-en', zhAttr: 'data-zh', label: 'Banner Breadcrumb' },
             { key: 'bannerTitle', file: 'products/home-decor.html', selector: '.page-banner__title', attr: 'data-en', zhAttr: 'data-zh', label: 'Banner Title' },
             { key: 'sectionLabel', file: 'products/home-decor.html', selector: '.section__label', attr: 'data-en', zhAttr: 'data-zh', label: 'Section Label' },
