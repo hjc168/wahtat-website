@@ -447,7 +447,7 @@
         .page-banner__bg { position: absolute; inset: 0; z-index: 0; }
         .page-banner__content { position: relative; z-index: 1; color: #fff; text-align: center; }
 
-        /* ===== AUTUMN BANNER（按用户提供 HTML/CSS） ===== */
+        /* ===== AUTUMN BANNER（按用户提供 CSS：单背景图含花艺南瓜 + 左侧文字组） ===== */
         .autumn-banner {
             position: relative;
             width: 100%;
@@ -457,45 +457,44 @@
             margin: 0 auto;
         }
         .autumn-banner .banner-bg {
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: url('../image/products/autumn/autumn_banner.jpg') center / cover no-repeat;
+            background: url('../image/products/autumn/banner.jpg') center center / cover no-repeat;
         }
-        .autumn-banner .banner-flower {
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            height: 100%;
-            object-fit: contain;
-            pointer-events: none;
-        }
-        .autumn-banner .banner-text {
+        .autumn-banner .banner-text-wrap {
             position: absolute;
             left: 140px;
             top: 50%;
             transform: translateY(-50%);
-            color: #F2E6C8;
+            z-index: 2;
         }
-        .autumn-banner .banner-text h1 {
+        .autumn-banner .banner-en {
             font-family: "Times New Roman", var(--font-serif), serif;
             font-size: 92px;
             font-weight: 700;
+            color: #F2E6C8;
             letter-spacing: 6px;
-            margin: 0 0 12px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
             line-height: 1.1;
+            margin: 0 0 12px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.32);
         }
-        .autumn-banner .banner-text h2 {
-            font-family: "Source Han Serif SC", "SimSun", var(--font-serif), serif;
+        .autumn-banner .banner-cn {
+            font-family: "Source Han Serif SC", "Noto Serif SC", "SimSun", serif;
             font-size: 44px;
             font-weight: 700;
-            margin: 0 0 16px;
+            color: #F2E6C8;
+            margin: 0 0 16px 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-        .autumn-banner .banner-text p {
-            font-family: "Source Han Sans SC", "Microsoft YaHei", var(--font-sans), sans-serif;
+        .autumn-banner .banner-desc {
+            font-family: "Source Han Sans SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
             font-size: 24px;
             color: #F7F1E3;
-            margin: 0 0 32px;
+            margin: 0 0 32px 0;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
         }
         .autumn-banner .banner-btn {
             display: inline-block;
@@ -506,15 +505,19 @@
             font-weight: 600;
             border-radius: 999px;
             text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            transition: background 0.3s ease;
+        }
+        .autumn-banner .banner-btn:hover {
+            background-color: #e9d5b3;
         }
         @media (max-width: 768px) {
             .autumn-banner { height: 460px; }
-            .autumn-banner .banner-text { left: 24px; right: 24px; }
-            .autumn-banner .banner-text h1 { font-size: 52px; letter-spacing: 3px; }
-            .autumn-banner .banner-text h2 { font-size: 26px; }
-            .autumn-banner .banner-text p { font-size: 15px; }
+            .autumn-banner .banner-text-wrap { left: 24px; right: 24px; }
+            .autumn-banner .banner-en { font-size: 52px; letter-spacing: 3px; }
+            .autumn-banner .banner-cn { font-size: 26px; }
+            .autumn-banner .banner-desc { font-size: 15px; }
             .autumn-banner .banner-btn { padding: 12px 32px; font-size: 18px; }
-            .autumn-banner .banner-flower { height: 80%; }
         }
         .page-banner__breadcrumb {
             font-size: 13px;
@@ -669,14 +672,15 @@
         </div>
     </div>
 
-    <!-- ===== AUTUMN BANNER（按用户提供 HTML：底图 + 右侧花艺透明图 + 左侧文字） ===== -->
+    <!-- ===== AUTUMN BANNER（按用户提供 HTML：单背景图含花艺南瓜 + 左侧文字组） ===== -->
     <section class="autumn-banner">
         <div class="banner-bg"></div>
-        <img class="banner-flower" src="../image/products/autumn/autumn_banner_flower.png" alt="autumn flower">
-        <div class="banner-text">
-            <h1>AUTUMN<br>COLLECTION</h1>
-            <h2>秋季仿真花与仿真植株专区</h2>
-            <p>工厂供应 | 花束组合 | 场景陈列 | 支持定制</p>
+        <div class="banner-text-wrap">
+            <h1 class="banner-en">
+                AUTUMN<br>COLLECTION
+            </h1>
+            <h2 class="banner-cn">秋季仿真花与仿真植株专区</h2>
+            <p class="banner-desc">工厂供应 | 花束组合 | 场景陈列 | 支持定制</p>
             <a href="#" class="banner-btn">立刻了解&gt;&gt;&gt;</a>
         </div>
     </section>
