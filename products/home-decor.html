@@ -446,6 +446,76 @@
         }
         .page-banner__bg { position: absolute; inset: 0; z-index: 0; }
         .page-banner__content { position: relative; z-index: 1; color: #fff; text-align: center; }
+
+        /* ===== AUTUMN BANNER（按用户提供 HTML/CSS） ===== */
+        .autumn-banner {
+            position: relative;
+            width: 100%;
+            max-width: 1900px;
+            height: 580px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .autumn-banner .banner-bg {
+            width: 100%;
+            height: 100%;
+            background: url('../image/products/autumn/autumn_banner.jpg') center / cover no-repeat;
+        }
+        .autumn-banner .banner-flower {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+        .autumn-banner .banner-text {
+            position: absolute;
+            left: 140px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #F2E6C8;
+        }
+        .autumn-banner .banner-text h1 {
+            font-family: "Times New Roman", var(--font-serif), serif;
+            font-size: 92px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            margin: 0 0 12px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+            line-height: 1.1;
+        }
+        .autumn-banner .banner-text h2 {
+            font-family: "Source Han Serif SC", "SimSun", var(--font-serif), serif;
+            font-size: 44px;
+            font-weight: 700;
+            margin: 0 0 16px;
+        }
+        .autumn-banner .banner-text p {
+            font-family: "Source Han Sans SC", "Microsoft YaHei", var(--font-sans), sans-serif;
+            font-size: 24px;
+            color: #F7F1E3;
+            margin: 0 0 32px;
+        }
+        .autumn-banner .banner-btn {
+            display: inline-block;
+            padding: 16px 48px;
+            background-color: #F2E2C0;
+            color: #603820;
+            font-size: 28px;
+            font-weight: 600;
+            border-radius: 999px;
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .autumn-banner { height: 460px; }
+            .autumn-banner .banner-text { left: 24px; right: 24px; }
+            .autumn-banner .banner-text h1 { font-size: 52px; letter-spacing: 3px; }
+            .autumn-banner .banner-text h2 { font-size: 26px; }
+            .autumn-banner .banner-text p { font-size: 15px; }
+            .autumn-banner .banner-btn { padding: 12px 32px; font-size: 18px; }
+            .autumn-banner .banner-flower { height: 80%; }
+        }
         .page-banner__breadcrumb {
             font-size: 13px;
             letter-spacing: 2px;
@@ -599,12 +669,15 @@
         </div>
     </div>
 
-    <!-- ===== PAGE BANNER ===== -->
-    <section class="page-banner">
-        <div class="page-banner__bg" style="background: linear-gradient(135deg, rgba(50,55,60,0.85) 0%, rgba(86,54,209,0.7) 100%), url('../image/site-images/unsplash/1616486338812-1920.jpg') center/cover no-repeat;"></div>
-        <div class="container page-banner__content">
-            <p class="page-banner__breadcrumb" data-en="Products | Artisanal Design | Autumn Collection" data-zh="产品 | 设计及手工艺 | 秋季系列">Products | Artisanal Design | Autumn Collection</p>
-            <h1 class="page-banner__title" data-en="Autumn Collection" data-zh="秋季系列">Autumn Collection</h1>
+    <!-- ===== AUTUMN BANNER（按用户提供 HTML：底图 + 右侧花艺透明图 + 左侧文字） ===== -->
+    <section class="autumn-banner">
+        <div class="banner-bg"></div>
+        <img class="banner-flower" src="../image/products/autumn/autumn_banner_flower.png" alt="autumn flower">
+        <div class="banner-text">
+            <h1>AUTUMN<br>COLLECTION</h1>
+            <h2>秋季仿真花与仿真植株专区</h2>
+            <p>工厂供应 | 花束组合 | 场景陈列 | 支持定制</p>
+            <a href="#" class="banner-btn">立刻了解&gt;&gt;&gt;</a>
         </div>
     </section>
 
