@@ -150,3 +150,4 @@
 | V123 | `2831df1` | 2026-10-27 | feat: 春季页新增两区（一次推送 3 个提交）— Spring Flower Stems 花枝区（8 张花卡）、Decor Scenarios 场景区（2 张场景卡）、Contact 按钮文案更新 |
 | V124 | `65e0591` | 2026-10-30 | feat: 秋季系列页建设（一次推送 6 个提交）— CTA 区（渐变 #9FB69C→#F1F7EB）、家居页改回秋季系列、秋季 Banner（含花艺南瓜底图 + 中英双语文字 + 限宽断行） |
 | V125 | `ce9fbe1` | 2026-11-02 | fix: 秋季页 Banner 文字只保留我的中英双译版本 |
+| V126 | `0c832cc` | 2026-11-02 | fix: 春季页字体本地化 — Inter/Playfair 本地 woff2，消除 Google Fonts CDN 依赖导致的样式差异 |
